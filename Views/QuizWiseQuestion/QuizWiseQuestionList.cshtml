@@ -1,0 +1,88 @@
+﻿
+<div class="pagetitle">
+    <h1>Quiz Wise Question List</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="QuizWiseQuestionList" asp-controller="QuizWiseQuestion">QuizWiseQuestion</a></li>
+            <li class="breadcrumb-item active">QuizWiseQuestion List</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Search QuizWiseQuestion</h5>
+                <!-- No Labels Form -->
+                <form class="row g-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Question Text">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Correct Options">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" placeholder="Question Marks">
+                    </div>
+                    <div class="text-start">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form><!-- End No Labels Form -->
+                <br>
+                <h2 class="card-title">QuizWiseQuestion List</h2>
+                <div class="d-flex p-3 justify-content-end">
+                    <a asp-action="QuizWiseQuestionForm" asp-controller="QuizWiseQuestion" class="btn btn-primary w-20">
+                        <i class="bi bi-plus"></i> Add QuizWiseQuestion
+                    </a>
+                </div>
+                <table class="table datatable">
+
+                    <thead>
+                        <tr>
+                            <th>QuizWiseQuestionsID</th>
+                            <th>Quiz Name</th>
+                            <th>Question Text</th>
+                            <th>User Name</th>
+                            <th>Modified</th>
+                            <th>Created</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                ASP.NET is a ____.
+                            </td>
+                            <td>You i am</td>
+                            <td>Karan</td>
+                            <td>2020/02/25</td>
+                            <td>2023/05/20</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                               View is a ____.
+                            </td>
+                            <td>Helo return</td>
+                            <td>Yash</td>
+                            <td>2018/02/25</td>
+                            <td>2023/05/20</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</section>

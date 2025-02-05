@@ -1,0 +1,91 @@
+﻿<div class="pagetitle">
+    <h1>Question Level List</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="QuestionLevelList" asp-controller="QuestionLevel">QuestionLevel</a></li>
+            <li class="breadcrumb-item active">Question Level List</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Search Question Level</h5>
+                <!-- No Labels Form -->
+                <form class="row g-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Quiz Name">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" placeholder="Total Question">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="date" class="form-control" placeholder="Quiz Date">
+                    </div>
+                    <div class="text-start">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form><!-- End No Labels Form -->
+                <br>
+                <h2 class="card-title">Question Level List</h2>
+                <div class="d-flex p-3 justify-content-end">
+                    <a asp-action="QuestionLevelForm" asp-controller="QuestionLevel" class="btn btn-primary w-20">
+                        <i class="bi bi-plus"></i> Add Question Level
+                    </a>
+                </div>
+                <table class="table datatable">
+
+                    <thead>
+                        <tr>
+                            <th>QuestionLevelID</th>
+                            <th>QuestionLevel</th>
+                            <th>User Name</th>
+                            <th>Created</th>
+                            <th>Modified</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>15</td>
+                            <td>Karan</td>
+                            <td>2002/08/04</td>
+                            <td>2002/08/06</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>25</td>
+                            <td>Nikhil</td>
+                            <td>2020/12/17</td>
+                            <td>2020/12/08</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>20</td>
+                            <td>Kritika</td>
+                            <td>2021/09/12</td>
+                            <td>2021/09/15</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</section>

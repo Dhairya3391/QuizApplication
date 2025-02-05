@@ -1,0 +1,216 @@
+﻿
+<div class="pagetitle">
+    <h1>Quiz List</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="QuizList" asp-controller="Quiz">Quiz</a></li>
+            <li class="breadcrumb-item active">Quiz List</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Search Quiz</h5>
+                <!-- No Labels Form -->
+                <form class="row g-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Quiz Name">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" placeholder="Total Question">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="date" class="form-control" placeholder="Quiz Date">
+                    </div>
+                    <div class="text-start">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form><!-- End No Labels Form -->
+                <br>
+                <h2 class="card-title">Quiz List</h2>
+                <div class="d-flex p-3 justify-content-end">
+                    <a asp-action="QuizForm" asp-controller="Quiz" class="btn btn-primary w-20">
+                        <i class="bi bi-plus"></i> Add Quiz
+                    </a>
+                </div>
+                <table class="table datatable">
+
+                    <thead>
+                        <tr>
+                            <th>
+                                <b>Q</b>uiz ID
+                            </th>
+                            <th>Quiz Name</th>
+                            <th>Total Question</th>
+                            <th data-type="date" data-format="YYYY/DD/MM">Quiz Date</th>
+                            <th>User Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Tree</td>
+                            <td>02</td>
+                            <td>2002/08/04</td>
+                            <td>Yash</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>JAava</td>
+                            <td>05</td>
+                            <td>2020/08/04</td>
+                            <td>Karan</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Smart Ai</td>
+                            <td>04</td>
+                            <td>2023/05/04</td>
+                            <td>Gokul</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Qroovc</td>
+                            <td>10</td>
+                            <td>2021/08/10</td>
+                            <td>Krithika</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Computer</td>
+                            <td>11</td>
+                            <td>2021/08/23</td>
+                            <td>Shiv</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Spam Message</td>
+                            <td>20</td>
+                            <td>2025/08/25</td>
+                            <td>Utsav</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>Cloud</td>
+                            <td>10</td>
+                            <td>2015/08/11</td>
+                            <td>Ramesh</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>8</td>
+                            <td>Rain</td>
+                            <td>15</td>
+                            <td>2023/08/10</td>
+                            <td>Tihsa</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>Python</td>
+                            <td>30</td>
+                            <td>2016/08/10</td>
+                            <td>Priya</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>ASP</td>
+                            <td>10</td>
+                            <td>2021/08/10</td>
+                            <td>Anjali</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>Laptop</td>
+                            <td>15</td>
+                            <td>2021/08/10</td>
+                            <td>RAvi</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td>Routing</td>
+                            <td>10</td>
+                            <td>2015/08/14</td>
+                            <td>Nisha</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td>Model</td>
+                            <td>10</td>
+                            <td>2018/08/20</td>
+                            <td>Nakul</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>14</td>
+                            <td>C Sharp</td>
+                            <td>09</td>
+                            <td>2023/08/18</td>
+                            <td>Ayush</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</section>

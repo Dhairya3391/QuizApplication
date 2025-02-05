@@ -1,0 +1,110 @@
+﻿<div class="pagetitle">
+    <h1>Question List</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="QuestionList" asp-controller="Question">Question</a></li>
+            <li class="breadcrumb-item active">Question List</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Search Question</h5>
+                <!-- No Labels Form -->
+                <form class="row g-3">
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Question Text">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" placeholder="Correct Options">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" placeholder="Question Marks">
+                    </div>
+                    <div class="text-start">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form><!-- End No Labels Form -->
+                <br>
+                <h2 class="card-title">Question List</h2>
+                <div class="d-flex p-3 justify-content-end">
+                    <a asp-action="QuestionForm" asp-controller="Question" class="btn btn-primary w-20">
+                        <i class="bi bi-plus"></i> Add Question
+                    </a>
+                </div>
+                <table class="table datatable">
+                    
+                    <thead>
+                        <tr>
+                            <th>
+                                <b>Q</b>uestion ID
+                            </th>
+                            <th>Question Text</th>
+                            <th>Option A</th>
+                            <th>Option B</th>
+                            <th>Option C</th>
+                            <th>Option D</th>
+                            <th>Correct Option</th>
+                            <th>Question Marks</th>
+                            <th>User Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                ASP.NET is a ____.
+                            </td>
+                            <td>
+                                Client-Side technology
+                            </td>
+                            <td>
+                                Server-side technology
+                            </td>
+                            <td>Both</td>
+                            <td>None</td>
+                            <td>B</td>
+                            <td>25</td>
+                            <td>Karan</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                What is the full form ASP?
+                            </td>
+                            <td>
+                                Access Server Pages
+                            </td>
+                            <td>
+                                Active Service Pages
+                            </td>
+                            <td>
+                                Active Server Pages
+                            </td>
+                            <td>
+                                Access Service Pages
+                            </td>
+                            <td>C</td>
+                            <td>20</td>
+                            <td>Yash</td>
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</section>
