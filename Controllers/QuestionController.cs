@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QuizApplication.Models;
 
 namespace QuizApplication.Controllers
 {
@@ -12,5 +13,18 @@ namespace QuizApplication.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult AddQuestion(QuestionModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                return RedirectToAction("QuestionList");
+            }
+
+            return View("QuestionForm");
+        }
+
     }
 }

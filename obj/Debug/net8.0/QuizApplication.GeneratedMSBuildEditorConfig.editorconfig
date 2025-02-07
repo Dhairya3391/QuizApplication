@@ -9,89 +9,89 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = QuizApplication
 build_property.RootNamespace = QuizApplication
-build_property.ProjectDir = D:\QuizApplication\
+build_property.ProjectDir = C:\Users\Harpalsinh\OneDrive\Desktop\work\btech\dotnet\QuizApplication\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\QuizApplication
+build_property.MSBuildProjectDirectory = C:\Users\Harpalsinh\OneDrive\Desktop\work\btech\dotnet\QuizApplication
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[D:/QuizApplication/Views/Home/Index.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/Home/Login.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/Home/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/Home/Privacy.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/Home/QuizTesting.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/Home/QuizTesting.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxRdWl6VGVzdGluZy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/Home/Register.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/Home/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/QuestionLevel/QuestionLevelForm.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/QuestionLevel/QuestionLevelForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVlc3Rpb25MZXZlbFxRdWVzdGlvbkxldmVsRm9ybS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/QuestionLevel/QuestionLevelList.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/QuestionLevel/QuestionLevelList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVlc3Rpb25MZXZlbFxRdWVzdGlvbkxldmVsTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/Question/QuestionForm.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/Question/QuestionForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVlc3Rpb25cUXVlc3Rpb25Gb3JtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/Question/QuestionList.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/Question/QuestionList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVlc3Rpb25cUXVlc3Rpb25MaXN0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/QuizWiseQuestion/QuizWiseQuestionForm.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/QuizWiseQuestion/QuizWiseQuestionForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpeldpc2VRdWVzdGlvblxRdWl6V2lzZVF1ZXN0aW9uRm9ybS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/QuizWiseQuestion/QuizWiseQuestionList.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/QuizWiseQuestion/QuizWiseQuestionList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpeldpc2VRdWVzdGlvblxRdWl6V2lzZVF1ZXN0aW9uTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/Quiz/QuizForm.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/Quiz/QuizForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxRdWl6Rm9ybS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/Quiz/QuizList.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/Quiz/QuizList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelxRdWl6TGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/Shared/Error.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/User/UserList.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/User/UserList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxVc2VyTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/_ViewImports.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/_ViewStart.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/QuizApplication/Views/Shared/_Layout.cshtml]
+[C:/Users/Harpalsinh/OneDrive/Desktop/work/btech/dotnet/QuizApplication/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-mx358jw0kq

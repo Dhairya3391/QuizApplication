@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QuizApplication.Models;
 
 namespace QuizApplication.Controllers
 {
@@ -11,6 +12,18 @@ namespace QuizApplication.Controllers
         public IActionResult QuestionLevelList()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddQuestionLevel(QuestionLevelsModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                return RedirectToAction("QuestionLevelList");
+            }
+
+            return View("QuestionLevelForm");
         }
     }
 }
