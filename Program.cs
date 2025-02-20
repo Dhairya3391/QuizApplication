@@ -1,7 +1,10 @@
+using QuizApplication.DbConfigruation;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<DbConfiguration>();
 
 var app = builder.Build();
 

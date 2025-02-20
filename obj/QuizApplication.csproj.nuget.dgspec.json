@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "/Users/dhairya/RiderProjects/QuizApplication/QuizApplication.csproj": {}
+    "D:\\QuizApplication\\QuizApplication.csproj": {}
   },
   "projects": {
-    "/Users/dhairya/RiderProjects/QuizApplication/QuizApplication.csproj": {
+    "D:\\QuizApplication\\QuizApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/dhairya/RiderProjects/QuizApplication/QuizApplication.csproj",
+        "projectUniqueName": "D:\\QuizApplication\\QuizApplication.csproj",
         "projectName": "QuizApplication",
-        "projectPath": "/Users/dhairya/RiderProjects/QuizApplication/QuizApplication.csproj",
-        "packagesPath": "/Users/dhairya/.nuget/packages/",
-        "outputPath": "/Users/dhairya/RiderProjects/QuizApplication/obj/",
+        "projectPath": "D:\\QuizApplication\\QuizApplication.csproj",
+        "packagesPath": "C:\\Users\\shrey\\.nuget\\packages\\",
+        "outputPath": "D:\\QuizApplication\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/dhairya/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\shrey\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -36,8 +42,9 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
-          "auditMode": "direct"
-        }
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net8.0": {
@@ -46,6 +53,10 @@
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
               "version": "[1.21.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.9.0, )"
             }
           },
           "imports": [
@@ -67,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/Users/dhairya/.dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

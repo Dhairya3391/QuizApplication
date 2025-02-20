@@ -1,17 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuizApplication.Models;
-
+using QuizApplication.DbConfigruation;
+using System.Data.SqlClient;
+using System.Data;
 namespace QuizApplication.Controllers
 {
     public class QuizController : Controller
     {
+        private readonly DbConfiguration _dbConfiguration;
+
+        public QuizController(DbConfiguration dbConfiguration)
+        {
+            _dbConfiguration = dbConfiguration;
+        }
+
         public IActionResult QuizForm()
         {
             return View();
         }
         public IActionResult QuizList()
         {
-            return View();
+            return View(_dbConfiguration.GetAllData("PR_Quiz_SelectAll"));
+            
         }
 
         [HttpPost]
