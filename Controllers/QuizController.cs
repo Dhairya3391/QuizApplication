@@ -34,7 +34,7 @@ namespace QuizApplication.Controllers
             //}
             if (ModelState.IsValid)
             {
-
+                
                 return RedirectToAction("QuizList");
             }
 
