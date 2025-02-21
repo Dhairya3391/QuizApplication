@@ -5,7 +5,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Question</a></li>
             <li class="breadcrumb-item">Forms</li>
-            <li class="breadcrumb-item active">AddEdit</li>
+            <li class="breadcrumb-item active">Edit</li>
         </ol>
     </nav>
 </div><!-- End Page Title -->
@@ -13,7 +13,7 @@
     <div class="row">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Question Add/Edit</h5>
+                <h5 class="card-title">Question Edit</h5>
 
                 <div class="p-2">
                     @* @if (TempData["SuccessMessage"] != null) *@
@@ -29,23 +29,16 @@
                     }
                 </div>
 
-                <!-- No Labels Form -->
-                @using (Html.BeginForm("AddQuestion", "Question", FormMethod.Post, new { @class = "row g-3" }))
+              
+                @using (Html.BeginForm("UpdateQuestion", "Question", FormMethod.Post, new { @class = "row g-3" }))
                 {
-
-                    @* TODO: not working *@
-                    @* <div class="col-md-12"> *@
-                    @*     @Html.TextBoxFor(m => m.UserID, new { @class = "form-control border border-black", @placeholder = "User ID", @Value = "12", @type = "hidden", @readonly = "readonly" }) *@
-                    @*     @Html.ValidationMessageFor(m => m.UserID, "", new { @class = "text-danger" }) *@
-                    @* </div> *@
-
+                    @Html.HiddenFor(m => m.QuestionID)
 
                     <div class="col-md-6">
                         @Html.TextBoxFor(m => m.QuestionText, new { @class = "form-control border border-black", @placeholder = "Question Text" })
                         @Html.ValidationMessageFor(m => m.QuestionText, "", new { @class = "text-danger" })
                     </div>
 
-                    
                     <div class="col-md-6">
                         @Html.TextBoxFor(m => m.OptionA, new { @class = "form-control border border-black", @placeholder = "Option A" })
                         @Html.ValidationMessageFor(m => m.OptionA, "", new { @class = "text-danger" })
@@ -66,20 +59,30 @@
                         @Html.ValidationMessageFor(m => m.OptionD, "", new { @class = "text-danger" })
                     </div>
 
+                    @* <div class="col-md-6"> *@
+                    @*     @Html.DropDownListFor(m => m.CorrectOption, new List<SelectListItem> *@
+                    @*     { *@
+                    @*         new SelectListItem { Text = "A", Value = "A" }, *@
+                    @*         new SelectListItem { Text = "B", Value = "B" }, *@
+                    @*         new SelectListItem { Text = "C", Value = "C" }, *@
+                    @*         new SelectListItem { Text = "D", Value = "D" } *@
+                    @*     }, "Select Correct Option", new { @class = "form-control border border-black" }) *@
+                    @*     @Html.ValidationMessageFor(m => m.CorrectOption, "", new { @class = "text-danger" }) *@
+                    @* </div> *@
                     <div class="col-md-6">
                         @Html.DropDownListFor(m => m.CorrectOption, new List<SelectListItem>
-                        {
-                            new SelectListItem { Text = "A", Value = "A" },
-                            new SelectListItem { Text = "B", Value = "B" },
-                            new SelectListItem { Text = "C", Value = "C" },
-                            new SelectListItem { Text = "D", Value = "D" }
-                        }, "Select Correct Option", new { @class = "form-control border border-black" })
+                    {
+                    new SelectListItem { Text = "A", Value = "A", Selected = Model.CorrectOption == "A" },
+                    new SelectListItem { Text = "B", Value = "B", Selected = Model.CorrectOption == "B" },
+                    new SelectListItem { Text = "C", Value = "C", Selected = Model.CorrectOption == "C" },
+                    new SelectListItem { Text = "D", Value = "D", Selected = Model.CorrectOption == "D" }
+                    }, "Select Correct Option", new { @class = "form-control border border-black" })
                         @Html.ValidationMessageFor(m => m.CorrectOption, "", new { @class = "text-danger" })
                     </div>
 
 
                     <div class="col-md-6">
-                        @Html.TextBoxFor(m => m.QuestionMarks, new { @class = "form-control border border-black", @placeholder = "QuestionMarks"})
+                        @Html.TextBoxFor(m => m.QuestionMarks, new { @class = "form-control border border-black", @placeholder = "Question Marks" })
                         @Html.ValidationMessageFor(m => m.QuestionMarks, "", new { @class = "text-danger" })
                     </div>
 
@@ -96,13 +99,11 @@
                         @Html.ValidationMessageFor(m => m.IsActive, "", new { @class = "text-danger" })
                     </div>
 
-
                     <div class="text-start">
                         <button type="submit" class="btn btn-primary">Save</button>
                         <button type="reset" class="btn btn-secondary">Cancel</button>
                     </div>
                 }
-
 
             </div>
         </div>

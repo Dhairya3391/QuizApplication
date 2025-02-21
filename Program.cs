@@ -1,10 +1,20 @@
 using QuizApplication.DbConfigruation;
+using QuizApplication.QuestionCRUD;
+using QuizApplication.QuestionLevelCRUD;
+using QuizApplication.QuizCRUD;
+using QuizApplication.QuizWiseQuestionCRUDCRUD;
+using QuizApplication.UserCRUD;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<DbConfiguration>();
+builder.Services.AddSingleton<QuestionCRUD>();
+builder.Services.AddSingleton<QuestionLevelCRUD>();
+builder.Services.AddSingleton<QuizCRUD>();
+builder.Services.AddSingleton<QuizWiseQuestionCRUD>();
+builder.Services.AddSingleton<UserCRUD>();
 
 var app = builder.Build();
 
