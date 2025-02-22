@@ -56,7 +56,7 @@
                         <i class="bi bi-plus"></i> Add Question
                     </a>
                 </div>
-                <table class="table datatable">
+                <table class="table table-responsive datatable">
 
                     <thead>
                         <tr>
@@ -91,8 +91,11 @@
                                 <td>@datarow["UserName"]</td>
                              
                                 <td>
+                                    <div class="d-flex gap-2">
                                     <a asp-action="editQuestion" asp-controller="Question" asp-route-id="@datarow["QuestionId"]" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
                                     <a asp-action="deleteQuestion" asp-controller="Question" asp-route-id="@datarow["QuestionId"]" class="btn btn-danger btn-sm" title="Remove question"><i class="bi bi-trash"></i></a>
+                                    </div>
+
                                 </td>
                             </tr>
                         }

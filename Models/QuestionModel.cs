@@ -54,7 +54,7 @@ namespace QuizApplication.Models
         public string CorrectOption { get; set; }
 
         [Required(ErrorMessage = "Question marks are required.")]
-        public int QuestionMarks { get; set; }
+        public int? QuestionMarks { get; set; }
 
         [Required(ErrorMessage = "Please specify if the question is active.")]
         public bool? IsActive { get; set; }
