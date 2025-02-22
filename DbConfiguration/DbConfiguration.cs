@@ -1,32 +1,70 @@
 ﻿using System.Data.SqlClient;
 using System.Data;
-using QuizApplication.Models;
+
 namespace QuizApplication.DbConfigruation
 {
     public class DbConfiguration
     {
-        private IConfiguration configuration;
+        private readonly IConfiguration configuration;
+        private readonly string connectionString;
 
         public DbConfiguration(IConfiguration _configuration)
         {
             configuration = _configuration;
+            connectionString = GetWorkingConnectionString();
         }
-        public DataTable GetAllData(String spName)
+
+        private string GetWorkingConnectionString()
         {
-            string connectionString = this.configuration.GetConnectionString("ConnectionString");
+            string[] connectionStrings =
+            {
+                configuration.GetConnectionString("ConnectionString1"),
+                configuration.GetConnectionString("ConnectionString2"),
+                configuration.GetConnectionString("ConnectionString3")
+            };
 
-            SqlConnection connection = new SqlConnection(connectionString);
-            connection.Open();
+            foreach (var conn in connectionStrings)
+            {
+                if (string.IsNullOrEmpty(conn)) continue; // Skip empty connection strings
 
-            SqlCommand command = connection.CreateCommand();
-            command.CommandType = CommandType.StoredProcedure;
-            command.CommandText = spName;
+                try
+                {
+                    using (var connection = new SqlConnection(conn))
+                    {
+                        connection.Open();
+                        connection.Close();
+                        Console.WriteLine($"Connected successfully to: {conn}");
+                        return conn; // Return first working connection
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine($"Failed to connect using: {conn}");
+                }
+            }
 
-            SqlDataReader reader = command.ExecuteReader();
+            throw new Exception("No valid database connection found!");
+        }
 
-            DataTable table = new DataTable();
-            table.Load(reader);
-            return table;
+        public DataTable GetAllData(string spName)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = spName;
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        DataTable table = new DataTable();
+                        table.Load(reader);
+                        return table;
+                    }
+                }
+            }
         }
     }
 }
