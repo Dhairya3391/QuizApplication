@@ -63,8 +63,10 @@
                                 <td>@datarow["QuizDate"]</td>
                              
                                 <td>
-                                    <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                    <div class="d-flex gap-2">
+                                        <a asp-action="EditQuiz" asp-controller="Quiz" asp-route-id="@datarow["QuizId"]" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                        <a asp-action="DeleteQuiz" asp-controller="Quiz" asp-route-id="@datarow["QuizId"]" class="btn btn-danger btn-sm" title="Remove question"><i class="bi bi-trash"></i></a>
+                                    </div>
                                 </td>
                             </tr>
                         }

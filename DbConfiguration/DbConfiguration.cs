@@ -18,6 +18,7 @@ namespace QuizApplication.DbConfigruation
         {
             string[] connectionStrings =
             {
+                configuration.GetConnectionString("ConnectionString"),
                 configuration.GetConnectionString("ConnectionString1"),
                 configuration.GetConnectionString("ConnectionString2"),
                 configuration.GetConnectionString("ConnectionString3")

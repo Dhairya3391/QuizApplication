@@ -1,0 +1,70 @@
+@model QuizModel
+
+<div class="pagetitle">
+    <h1>Quiz Forms</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Quiz</a></li>
+            <li class="breadcrumb-item">Forms</li>
+            <li class="breadcrumb-item active">Edit</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Quiz Edit</h5>
+
+                <div class="p-2">
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger d-flex justify-content-between">
+                            @TempData["ErrorMessage"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background-size:50%"></button>
+                        </div>
+                    }
+                </div>
+
+                @using (Html.BeginForm("UpdateQuiz", "Quiz", FormMethod.Post, new { @class = "row g-3" }))
+                {
+                    @Html.HiddenFor(m => m.QuizID)
+
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.QuizName, new { @class = "form-control border border-black", @placeholder = "Quiz Name" })
+                        @Html.ValidationMessageFor(m => m.QuizName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.TotalQuestions, new { @class = "form-control border border-black", @placeholder = "Total Questions", @type = "number" })
+                        @Html.ValidationMessageFor(m => m.TotalQuestions, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.QuizDate, new { @class = "form-control border border-black", @placeholder = "Quiz Date", @type = "date" })
+                        @Html.ValidationMessageFor(m => m.QuizDate, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.UserID, new { @class = "form-control border border-black", @placeholder = "User ID", @type = "number" })
+                        @Html.ValidationMessageFor(m => m.UserID, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.Created, new { @class = "form-control border border-black", @placeholder = "Created", @readonly = "readonly" })
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.TextBoxFor(m => m.Modified, new { @class = "form-control border border-black", @placeholder = "Modified", @readonly = "readonly" })
+                    </div>
+
+                    <div class="text-start">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="@Url.Action("QuizList", "Quiz")" class="btn btn-secondary">Cancel</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
