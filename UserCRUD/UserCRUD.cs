@@ -2,38 +2,39 @@
 using System.Data.SqlClient;
 using QuizApplication.Models;
 
-namespace QuizApplication.UserCRUD
+namespace QuizApplication.UserCrud
 {
-    public class UserCRUD
+    public class UserCrud
     {
-        private IConfiguration configuration;
-        
+        private readonly string _connectionString;
 
-        public UserCRUD(IConfiguration _configuration)
+        public UserCrud(IConfiguration configuration)
         {
-            configuration = _configuration;
+            _connectionString = configuration.GetConnectionString("ConnectionString");
+            if (string.IsNullOrEmpty(_connectionString))
+            {
+                throw new ArgumentNullException(nameof(_connectionString), "Connection string 'DefaultConnection' not found.");
+            }
         }
 
-        public bool AddQuiz(UserModel model)
+        public bool RegisterUser(User user)
         {
-            string connectionString = configuration.GetConnectionString("ConnectionString");
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                var command = new SqlCommand("PR_User_Register", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
 
-            SqlConnection connection = new SqlConnection(connectionString);
-            connection.Open();
-            SqlCommand command = new SqlCommand("PR_User_Insert", connection);
-            command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Username", user.Username);
+                command.Parameters.AddWithValue("@Password", user.Password);
+                command.Parameters.AddWithValue("@Email", user.Email ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@Mobile", user.Mobile ?? (object)DBNull.Value);
 
-            command.Parameters.AddWithValue("@UserID", model.UserID);
-            command.Parameters.AddWithValue("@UserName", model.UserName);
-            command.Parameters.AddWithValue("@Password", model.Password);
-            command.Parameters.AddWithValue("@ConfirmPassword", model.ConfirmPassword);
-            command.Parameters.AddWithValue("@Email", model.Email);
-            command.Parameters.AddWithValue("@MobileNo", model.MobileNo);
-            command.Parameters.AddWithValue("@Created", model.Created);
-            command.Parameters.AddWithValue("@Modified", model.Modified);
-            int result = command.ExecuteNonQuery();
-            return result > 0;
-
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
         }
     }
 }

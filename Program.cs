@@ -3,7 +3,7 @@ using QuizApplication.QuestionCRUD;
 using QuizApplication.QuestionLevelCRUD;
 using QuizApplication.QuizCRUD;
 using QuizApplication.QuizWiseQuestionCRUDCRUD;
-using QuizApplication.UserCRUD;
+using QuizApplication.UserCrud;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +14,7 @@ builder.Services.AddSingleton<QuestionCRUD>();
 builder.Services.AddSingleton<QuestionLevelCRUD>();
 builder.Services.AddSingleton<QuizCRUD>();
 builder.Services.AddSingleton<QuizWiseQuestionCRUD>();
-builder.Services.AddSingleton<UserCRUD>();
+builder.Services.AddSingleton<UserCrud>();
 
 var app = builder.Build();
 

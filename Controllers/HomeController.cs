@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using QuizApplication.DbConfigruation;
 using QuizApplication.Models;
 
 namespace QuizApplication.Controllers
@@ -7,7 +8,7 @@ namespace QuizApplication.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -25,11 +26,6 @@ namespace QuizApplication.Controllers
         {
             return View();
         }
-        public IActionResult Register()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
