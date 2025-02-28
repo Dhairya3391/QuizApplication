@@ -16,7 +16,6 @@ namespace QuizApplication.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Username = HttpContext.Session.GetString("Username");
             return View();
         }
         public IActionResult QuizTesting()
