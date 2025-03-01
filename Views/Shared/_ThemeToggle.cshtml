@@ -379,37 +379,26 @@
         }
     </style>
     
-    <!-- Other head elements -->
-</head>
-<body><!-- Add the theme toggle before your other nav items -->
-                <li class="nav-item">
-                    <div class="theme-toggle-wrapper">
-                        <label class="theme-toggle">
-                            <input type="checkbox" id="theme-toggle">
-                            <span class="theme-toggle-slider"></span>
-                        </label>
-                    </div>
-                </li>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get the toggle checkbox
-            const themeToggle = document.getElementById('theme-toggle');
-            
+        (function() {
+             const themeToggle = document.getElementById('theme-toggle');
+
             // Check for saved theme preference or respect OS preference
             const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
             const currentTheme = localStorage.getItem('theme');
-            
+
             // If the user has explicitly chosen a theme, use it
             if (currentTheme) {
                 document.documentElement.classList.toggle('dark', currentTheme === 'dark');
                 themeToggle.checked = currentTheme === 'dark';
-            } 
+            }
             // Otherwise, respect the OS preference
             else if (prefersDarkScheme.matches) {
                 document.documentElement.classList.add('dark');
                 themeToggle.checked = true;
             }
-            
+
             // Listen for toggle changes
             themeToggle.addEventListener('change', function() {
                 if (this.checked) {
@@ -420,7 +409,7 @@
                     localStorage.setItem('theme', 'light');
                 }
             });
-          
+
             prefersDarkScheme.addEventListener('change', function(e) {
                 if (!localStorage.getItem('theme')) {
                     if (e.matches) {
@@ -432,8 +421,64 @@
                     }
                 }
             });
-        });
+        })();
     </script>
+
+    <!-- Other head elements -->
+</head>
+<body><!-- Add the theme toggle before your other nav items -->
+                <li class="nav-item">
+                    <div class="theme-toggle-wrapper">
+                        <label class="theme-toggle">
+                            <input type="checkbox" id="theme-toggle">
+                            <span class="theme-toggle-slider"></span>
+                        </label>
+                    </div>
+                </li>
+    @* <script> *@
+    @*     document.addEventListener('DOMContentLoaded', function() { *@
+    @*         // Get the toggle checkbox *@
+    @*         const themeToggle = document.getElementById('theme-toggle'); *@
+            
+    @*         // Check for saved theme preference or respect OS preference *@
+    @*         const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)'); *@
+    @*         const currentTheme = localStorage.getItem('theme'); *@
+            
+    @*         // If the user has explicitly chosen a theme, use it *@
+    @*         if (currentTheme) { *@
+    @*             document.documentElement.classList.toggle('dark', currentTheme === 'dark'); *@
+    @*             themeToggle.checked = currentTheme === 'dark'; *@
+    @*         }  *@
+    @*         // Otherwise, respect the OS preference *@
+    @*         else if (prefersDarkScheme.matches) { *@
+    @*             document.documentElement.classList.add('dark'); *@
+    @*             themeToggle.checked = true; *@
+    @*         } *@
+            
+    @*         // Listen for toggle changes *@
+    @*         themeToggle.addEventListener('change', function() { *@
+    @*             if (this.checked) { *@
+    @*                 document.documentElement.classList.add('dark'); *@
+    @*                 localStorage.setItem('theme', 'dark'); *@
+    @*             } else { *@
+    @*                 document.documentElement.classList.remove('dark'); *@
+    @*                 localStorage.setItem('theme', 'light'); *@
+    @*             } *@
+    @*         }); *@
+          
+    @*         prefersDarkScheme.addEventListener('change', function(e) { *@
+    @*             if (!localStorage.getItem('theme')) { *@
+    @*                 if (e.matches) { *@
+    @*                     document.documentElement.classList.add('dark'); *@
+    @*                     themeToggle.checked = true; *@
+    @*                 } else { *@
+    @*                     document.documentElement.classList.remove('dark'); *@
+    @*                     themeToggle.checked = false; *@
+    @*                 } *@
+    @*             } *@
+    @*         }); *@
+    @*     }); *@
+    @* </script> *@
 </body>
 </html>
 
