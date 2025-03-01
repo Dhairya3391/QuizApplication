@@ -5,10 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>@ViewData["Title"] - YourAppName</title>
     
-    <!-- Your existing CSS references -->
-    <link href="~/css/style.css" rel="stylesheet" />
     
-    <!-- Embed dark mode CSS directly -->
     <style>
         /* Dark Mode Variables */
         :root {
@@ -423,10 +420,8 @@
                     localStorage.setItem('theme', 'light');
                 }
             });
-            
-            // Listen for OS theme changes
+          
             prefersDarkScheme.addEventListener('change', function(e) {
-                // Only apply OS preference if user hasn't explicitly chosen a theme
                 if (!localStorage.getItem('theme')) {
                     if (e.matches) {
                         document.documentElement.classList.add('dark');
