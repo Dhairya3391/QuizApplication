@@ -38,21 +38,23 @@ app.UseSession();
 app.UseStaticFiles();
 app.UseAuthorization();
 
-// Middleware to restrict access
 app.Use(async (context, next) =>
 {
-    var path = context.Request.Path.Value.ToLower();
-    System.Diagnostics.Debug.WriteLine($"Request path: {path}");
-    
-    if (path.StartsWith("/css") || path.StartsWith("/assets") || path.StartsWith("/js"))
+    var path = context.Request.Path.Value;
+    System.Diagnostics.Debug.WriteLine($"Raw request path: {path} (Method: {context.Request.Method})");
+    var lowerPath = path.ToLower();
+    System.Diagnostics.Debug.WriteLine($"Lowered request path: {lowerPath}");
+
+    // Skip middleware for static files
+    if (lowerPath.StartsWith("/css") || lowerPath.StartsWith("/assets") || lowerPath.StartsWith("/js"))
     {
         System.Diagnostics.Debug.WriteLine("Static file request, skipping middleware");
         await next.Invoke();
         return;
     }
 
-    bool isLogin = path == "/auth/login" || path.StartsWith("/auth/login/");
-    bool isRegister = path == "/auth/register" || path.StartsWith("/auth/register/");
+    bool isLogin = lowerPath == "/auth/login" || lowerPath.StartsWith("/auth/login/");
+    bool isRegister = lowerPath == "/auth/register" || lowerPath.StartsWith("/auth/register/");
     bool isLoggedIn = context.Session.GetInt32("UserId").HasValue;
 
     System.Diagnostics.Debug.WriteLine($"IsLogin: {isLogin}, IsRegister: {isRegister}, IsLoggedIn: {isLoggedIn}");
@@ -72,7 +74,8 @@ app.Use(async (context, next) =>
 app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Auth}/{action=Register}/{id?}"
+    pattern: "{controller}/{action}/{id?}",
+    defaults: new { controller = "Auth", action = "Login" }
 );
 
 app.Run();
