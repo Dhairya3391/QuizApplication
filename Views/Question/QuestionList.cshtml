@@ -1,5 +1,22 @@
 ﻿@model DataTable
 @using System.Data
+
+
+<style>
+    .table td, .table th {
+        white-space: normal;    /* Allows text to wrap instead of staying on one line */
+        word-wrap: break-word;  /* Breaks long words to fit within the cell */
+    }
+</style>
+
+<script type="text/javascript" charset="UTF-8">
+    $(document).ready(function() {
+        $('.datatable').DataTable({
+            responsive: true    /* Enables responsive features like collapsing columns on small screens */
+        });
+    });
+</script>
+
 <div class="pagetitle">
     <h1>Question List</h1>
     <nav>
@@ -56,9 +73,9 @@
                         <i class="bi bi-plus"></i> Add Question
                     </a>
                 </div>
-                <table class="table table-responsive datatable">
-
-                    <thead>
+                <div class="table-responsive">
+                    <table class="table datatable">
+                        <thead>
                         <tr>
                             <th>
                                 <b>Q</b>uestion ID
@@ -74,8 +91,8 @@
                             <th>User Name</th>
                             <th>Action</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         @foreach (DataRow datarow in Model.Rows)
                         {
                             <tr>
@@ -92,16 +109,16 @@
                              
                                 <td>
                                     <div class="d-flex gap-2">
-                                    <a asp-action="editQuestion" asp-controller="Question" asp-route-id="@datarow["QuestionId"]" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
-                                    <a asp-action="deleteQuestion" asp-controller="Question" asp-route-id="@datarow["QuestionId"]" class="btn btn-danger btn-sm" title="Remove question"><i class="bi bi-trash"></i></a>
+                                        <a asp-action="editQuestion" asp-controller="Question" asp-route-id="@datarow["QuestionId"]" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                        <a asp-action="deleteQuestion" asp-controller="Question" asp-route-id="@datarow["QuestionId"]" class="btn btn-danger btn-sm" title="Remove question"><i class="bi bi-trash"></i></a>
                                     </div>
 
                                 </td>
                             </tr>
                         }
-                    </tbody>
-                </table>
-
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
