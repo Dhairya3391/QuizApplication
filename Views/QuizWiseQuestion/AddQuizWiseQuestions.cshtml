@@ -1,0 +1,74 @@
+﻿@model DataTable
+@using System.Data
+
+<div class="pagetitle">
+    <h1>Quiz Wise Question Add</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="QuizWiseQuestionList" asp-controller="QuizWiseQuestion">Quiz Wise Questions</a></li>
+            <li class="breadcrumb-item active">Add Quiz Wise Questions</li>
+        </ol>
+    </nav>
+</div><!-- End Page Title -->
+
+<section class="section">
+    <div class="row">
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Quiz Name: @ViewBag.QuizName</h5>
+                <p>Total Questions Allowed: @ViewBag.TotalQuestions</p>
+                <p>Selected Questions: <span data-selected-questions-count="1">1</span></p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox"/></th>
+                                <th>Question</th>
+                                <th>Option A</th>
+                                <th>Option B</th>
+                                <th>Option C</th>
+                                <th>Option D</th>
+                                <th>Correct Option</th>
+                                <th>Marks</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (DataRow datarow in Model.Rows)
+                            {
+                                <tr>
+                                    <td><input type="checkbox" name="questions[]" value="@datarow["QuestionId"]"/></td>
+                                    <td>@datarow["QuestionText"]</td>
+                                    <td>@datarow["OptionA"]</td>
+                                    <td>@datarow["OptionB"]</td>
+                                    <td>@datarow["OptionC"]</td>
+                                    <td>@datarow["OptionD"]</td>
+                                    <td>@datarow["CorrectOption"]</td>
+                                    <td>@datarow["QuestionMarks"]</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <div class="text-start">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="@Url.Action("QuizWiseQuestionList", "QuizWiseQuestion")" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function() {
+        console.log( "ready!" );
+    });
+</script>

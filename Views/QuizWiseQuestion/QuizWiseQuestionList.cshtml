@@ -12,41 +12,44 @@
 
 <section class="section">
     <div class="row">
+
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Search QuizWiseQuestion</h5>
+                <h5 class="card-title">Search Quiz</h5>
                 <!-- No Labels Form -->
                 <form class="row g-3">
                     <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="Question Text">
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="Correct Options">
-                    </div>
-                    <div class="col-md-4">
-                        <input type="number" class="form-control" placeholder="Question Marks">
+                        <label for="quizSearch" class="form-label">Select Quiz</label>
+                        <select id="quizSearch" class="form-select border border-black">
+                            <option selected>Select quiz</option>
+                            <option>maths</option>
+                            <option>sci</option>
+                        </select>
                     </div>
                     <div class="text-start">
                         <button type="submit" class="btn btn-primary">Search</button>
                         <button type="reset" class="btn btn-secondary">Reset</button>
                     </div>
                 </form><!-- End No Labels Form -->
-                <br>
-                <h2 class="card-title">QuizWiseQuestion List</h2>
-                <div class="d-flex p-3 justify-content-end">
-                    <a asp-action="QuizWiseQuestionForm" asp-controller="QuizWiseQuestion" class="btn btn-primary w-20">
-                        <i class="bi bi-plus"></i> Add QuizWiseQuestion
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex p-3 justify-content-between align-items-center">
+                    <h2 class="card-title">Quiz Wise Questions</h2>
+
+                    <a asp-action="QuizWiseQuestionForm" asp-controller="QuizWiseQuestion" class="btn btn-primary">
+                        <i class="bi bi-plus"></i> Add Quiz Wise Question
                     </a>
                 </div>
                 <table class="table datatable">
 
                     <thead>
                         <tr>
-                            <th>QuizWiseQuestionsID</th>
                             <th>Quiz Name</th>
-                            <th>Question Text</th>
+                            <th>Entered Questions</th>
                             <th>User Name</th>
-                          
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -54,14 +57,13 @@
                         @foreach (DataRow datarow in Model.Rows)
                         {
                             <tr>
-                                <td>@datarow["QuizWiseQuestionsID"]</td>
                                 <td>@datarow["QuizName"]</td>
-                                <td>@datarow["QuestionText"]</td>
+                                <td>@datarow["Entered Questions"]</td>
                                 <td>@datarow["UserName"]</td>
-                                
                                 <td>
-                                    <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                    <a class="btn btn-info btn-sm text-white" title="Details" asp-action="QuizWiseQuestionDetails" asp-controller="QuizWiseQuestion" asp-route-quizId="@datarow["QuizID"]" asp-route-quizName="@datarow["QuizName"]" asp-route-totalQuestions="@datarow["TotalQuestions"]"><i class="bi bi-info-circle"></i></a>
+                                    <a class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil"></i></a>
+                                    <a class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
                         }

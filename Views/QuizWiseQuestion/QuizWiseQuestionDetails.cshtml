@@ -16,32 +16,19 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Search Quiz</h5>
-                <!-- No Labels Form -->
-                <form class="row g-3">
-                    <div class="col-md-4">
-                        <label for="quizSearch" class="form-label">Select Quiz</label>
-                        <select id="quizSearch" class="form-select border border-black">
-                            <option selected>Select quiz</option>
-                            <option>maths</option>
-                            <option>sci</option>
-                        </select>
-                    </div>
-                    <div class="text-start">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                        <button type="reset" class="btn btn-secondary">Reset</button>
-                    </div>
-                </form><!-- End No Labels Form -->
+                <h5 class="card-title">Quiz Name: @ViewBag.QuizName</h5>
+                @* <h2>Quiz Name: @ViewBag.QuizName</h2> *@
+                <p>Total Questions: @ViewBag.TotalQuestions</p>
             </div>
         </div>
 
         <div class="card">
             <div class="card-body">
                 <div class="d-flex p-3 justify-content-between align-items-center">
-                    <h2 class="card-title">Quiz Wise Questions</h2>
+                    <h2 class="card-title">Questions (@ViewBag.QuizName)</h2>
 
-                    <a asp-action="QuizWiseQuestionForm" asp-controller="QuizWiseQuestion" class="btn btn-primary">
-                        <i class="bi bi-plus"></i> Add Quiz Wise Question
+                    <a asp-action="AddQuizWiseQuestions" asp-controller="QuizWiseQuestion" class="btn btn-primary" asp-route-quizName="@ViewBag.QuizName" asp-route-totalQuestions="@ViewBag.TotalQuestions">
+                        <i class="bi bi-plus"></i> Add Questions
                     </a>
 
                 </div>
@@ -49,9 +36,13 @@
 
                     <thead>
                         <tr>
-                            <th>Quiz Name</th>
-                            <th>Entered Questions</th>
-                            <th>User Name</th>
+                            <th>Question</th>
+                            <th>Option A</th>
+                            <th>Option B</th>
+                            <th>Option C</th>
+                            <th>Option D</th>
+                            <th>Correct Option</th>
+                            <th>Marks</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -59,12 +50,14 @@
                         @foreach (DataRow datarow in Model.Rows)
                         {
                             <tr>
-                                <td>@datarow["QuizName"]</td>
-                                <td>@datarow["Entered Questions"]</td>
-                                <td>@datarow["UserName"]</td>
+                                <td>@datarow["QuestionText"]</td>
+                                <td>@datarow["OptionA"]</td>
+                                <td>@datarow["OptionB"]</td>
+                                <td>@datarow["OptionC"]</td>
+                                <td>@datarow["OptionD"]</td>
+                                <td>@datarow["CorrectOption"]</td>
+                                <td>@datarow["QuestionMarks"]</td>
                                 <td>
-                                    <a href="#" class="btn btn-info btn-sm text-white" title="Details" asp-action="QuizWiseQuestionDetails" asp-controller="QuizWiseQuestion"><i class="bi bi-info-circle"></i></a>
-                                    <a href="#" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil"></i></a>
                                     <a href="#" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
