@@ -32,7 +32,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseRouting();
 app.UseSession();
 app.UseStaticFiles();
@@ -57,14 +57,14 @@ app.Use(async (context, next) =>
     }
     else
     {
-        context.Response.Redirect("/Auth/Register");
+        context.Response.Redirect("/Auth/Login");
     }
 });
 
 app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Auth}/{action=Register}/{id?}"
+    pattern: "{controller=Auth}/{action=Login}/{id?}"
 );
 
 app.Run();
