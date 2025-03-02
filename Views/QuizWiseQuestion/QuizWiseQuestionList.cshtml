@@ -1,10 +1,11 @@
-﻿@model DataTable
-@using System.Data
+﻿@using System.Data
+@model System.Data.DataTable
 <div class="pagetitle">
     <h1>Quiz Wise Question List</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="QuizWiseQuestionList" asp-controller="QuizWiseQuestion">QuizWiseQuestion</a></li>
+            <li class="breadcrumb-item"><a asp-action="QuizWiseQuestionList" asp-controller="QuizWiseQuestion">QuizWiseQuestion</a>
+            </li>
             <li class="breadcrumb-item active">QuizWiseQuestion List</li>
         </ol>
     </nav>
@@ -41,30 +42,32 @@
                 <table class="table datatable">
 
                     <thead>
-                        <tr>
-                            <th>QuizWiseQuestionsID</th>
-                            <th>Quiz Name</th>
-                            <th>Question Text</th>
-                            <th>User Name</th>
-                          
-                            <th>Action</th>
-                        </tr>
+                    <tr>
+                        <th>QuizWiseQuestionsID</th>
+                        <th>Quiz Name</th>
+                        <th>Question Text</th>
+                        <th>User Name</th>
+
+                        <th>Action</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach (DataRow datarow in Model.Rows)
-                        {
-                            <tr>
-                                <td>@datarow["QuizWiseQuestionsID"]</td>
-                                <td>@datarow["QuizName"]</td>
-                                <td>@datarow["QuestionText"]</td>
-                                <td>@datarow["UserName"]</td>
-                                
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                                </td>
-                            </tr>
-                        }
+                    @foreach (DataRow datarow in Model.Rows)
+                    {
+                        <tr>
+                            <td>@datarow["QuizWiseQuestionsID"]</td>
+                            <td>@datarow["QuizName"]</td>
+                            <td>@datarow["QuestionText"]</td>
+                            <td>@datarow["UserName"]</td>
+
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i
+                                        class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i
+                                        class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
 

@@ -1,5 +1,5 @@
-﻿@model DataTable
-@using System.Data
+﻿@using System.Data
+@model System.Data.DataTable
 <div class="pagetitle">
     <h1>User List</h1>
     <nav>
@@ -21,7 +21,7 @@
                         <input type="text" class="form-control" placeholder="User Name">
                     </div>
                     <div class="text-start">
-                        <button type="submit" class="btn btn-primary">Search</button>   
+                        <button type="submit" class="btn btn-primary">Search</button>
                         <button type="reset" class="btn btn-secondary">Reset</button>
                     </div>
                 </form><!-- End No Labels Form -->
@@ -30,35 +30,37 @@
                 <table class="table datatable">
 
                     <thead>
-                        <tr>
-                            <th>
-                                <b>U</b>ser ID
-                            </th>
-                            <th>User Name</th>
-                            <th>Email</th>
-                            <th>Mobile</th>
-                            <th>IsActive</th>
-                            <th>IsAdmin</th>
-                            <th>Action</th>
-                        </tr>
+                    <tr>
+                        <th>
+                            <b>U</b>ser ID
+                        </th>
+                        <th>User Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>IsActive</th>
+                        <th>IsAdmin</th>
+                        <th>Action</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach (DataRow datarow in Model.Rows)
-                        {
-                            <tr>
-                                <td>@datarow["UserId"]</td>
-                                <td>@datarow["UserName"]</td>
-                                <td>@datarow["Email"]</td>
-                                <td>@datarow["Mobile"]</td>
-                                <td>@datarow["IsActive"]</td>
-                                <td>@datarow["IsAdmin"]</td>
-                               
-                                <td>
-                                    <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                                </td>
-                            </tr>
-                        }
+                    @foreach (DataRow datarow in Model.Rows)
+                    {
+                        <tr>
+                            <td>@datarow["UserId"]</td>
+                            <td>@datarow["UserName"]</td>
+                            <td>@datarow["Email"]</td>
+                            <td>@datarow["Mobile"]</td>
+                            <td>@datarow["IsActive"]</td>
+                            <td>@datarow["IsAdmin"]</td>
+
+                            <td>
+                                <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i
+                                        class="bi bi-pencil"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i
+                                        class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
 

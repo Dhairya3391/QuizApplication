@@ -1,85 +1,5 @@
-﻿@* @model DataTable *@
-@* @using System.Data *@
-@* *@
-@* <div class="pagetitle"> *@
-@*     <h1>Quiz List</h1> *@
-@*     <nav> *@
-@*         <ol class="breadcrumb"> *@
-@*             <li class="breadcrumb-item"><a asp-action="QuizList" asp-controller="Quiz">Quiz</a></li> *@
-@*             <li class="breadcrumb-item active">Quiz List</li> *@
-@*         </ol> *@
-@*     </nav> *@
-@* </div><!-- End Page Title --> *@
-@* *@
-@* <section class="section"> *@
-@*     <div class="row"> *@
-@*         <div class="card"> *@
-@*             <div class="card-body"> *@
-@*                 <h5 class="card-title">Search Quiz</h5> *@
-@*                 <!-- No Labels Form --> *@
-@*                 <form class="row g-3"> *@
-@*                     <div class="col-md-4"> *@
-@*                         <input type="text" class="form-control" placeholder="Quiz Name"> *@
-@*                     </div> *@
-@*                     <div class="col-md-4"> *@
-@*                         <input type="number" class="form-control" placeholder="Total Question"> *@
-@*                     </div> *@
-@*                     <div class="col-md-4"> *@
-@*                         <input type="date" class="form-control" placeholder="Quiz Date"> *@
-@*                     </div> *@
-@*                     <div class="text-start"> *@
-@*                         <button type="submit" class="btn btn-primary">Search</button> *@
-@*                         <button type="reset" class="btn btn-secondary">Reset</button> *@
-@*                     </div> *@
-@*                 </form><!-- End No Labels Form --> *@
-@*                 <br> *@
-@*                 <h2 class="card-title">Quiz List</h2> *@
-@*                 <div class="d-flex p-3 justify-content-end"> *@
-@*                     <a asp-action="QuizForm" asp-controller="Quiz" class="btn btn-primary w-20"> *@
-@*                         <i class="bi bi-plus"></i> Add Quiz *@
-@*                     </a> *@
-@*                 </div> *@
-@*                 <table class="table datatable"> *@
-@* *@
-@*                     <thead> *@
-@*                         <tr> *@
-@*                             <th> *@
-@*                                 <b>Q</b>uiz ID *@
-@*                             </th> *@
-@*                             <th>Quiz Name</th> *@
-@*                             <th>Total Question</th> *@
-@*                             <th data-type="date" data-format="YYYY/DD/MM">Quiz Date</th> *@
-@*                             $1$ <th>User Name</th> todo: add this field in PR_Quiz_SelectAll #1# *@
-@*                             <th>Action</th> *@
-@*                         </tr> *@
-@*                     </thead> *@
-@*                     <tbody> *@
-@*                         @foreach (DataRow datarow in Model.Rows) *@
-@*                         { *@
-@*                             <tr> *@
-@*                                 <td>@datarow["QuizID"]</td> *@
-@*                                 <td>@datarow["QuizName"]</td> *@
-@*                                 <td>@datarow["TotalQuestions"]</td> *@
-@*                                 <td>@datarow["QuizDate"]</td> *@
-@*                               *@
-@*                                 <td> *@
-@*                                     <div class="d-flex gap-2"> *@
-@*                                         <a asp-action="EditQuiz" asp-controller="Quiz" asp-route-id="@datarow["QuizId"]" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a> *@
-@*                                         <a asp-action="DeleteQuiz" asp-controller="Quiz" asp-route-id="@datarow["QuizId"]" class="btn btn-danger btn-sm" title="Remove question"><i class="bi bi-trash"></i></a> *@
-@*                                     </div> *@
-@*                                 </td> *@
-@*                             </tr> *@
-@*                         } *@
-@*                     </tbody> *@
-@*                 </table> *@
-@* *@
-@*             </div> *@
-@*         </div> *@
-@*     </div> *@
-@* </section> *@
-
-@model DataTable
-@using System.Data
+﻿@using System.Data
+@model System.Data.DataTable
 
 <div class="pagetitle">
     <h1>Quiz List</h1>
@@ -99,10 +19,12 @@
                 <!-- No Labels Form -->
                 <form class="row g-3" asp-action="QuizList" asp-controller="Quiz" method="get">
                     <div class="col-md-4">
-                        <input type="text" class="form-control" name="quizName" placeholder="Quiz Name" value="@ViewBag.QuizName">
+                        <input type="text" class="form-control" name="quizName" placeholder="Quiz Name"
+                               value="@ViewBag.QuizName">
                     </div>
                     <div class="col-md-4">
-                        <input type="number" class="form-control" name="totalQuestion" placeholder="Total Question" value="@ViewBag.TotalQuestion">
+                        <input type="number" class="form-control" name="totalQuestion" placeholder="Total Question"
+                               value="@ViewBag.TotalQuestion">
                     </div>
                     <div class="col-md-4">
                         <input type="date" class="form-control" name="quizDate" value="@ViewBag.QuizDate">
@@ -121,30 +43,32 @@
                 </div>
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th>Quiz ID</th>
-                            <th>Quiz Name</th>
-                            <th>Total Question</th>
-                            <th data-type="date" data-format="YYYY/DD/MM">Quiz Date</th>
-                            <th>Action</th>
-                        </tr>
+                    <tr>
+                        <th>Quiz ID</th>
+                        <th>Quiz Name</th>
+                        <th>Total Question</th>
+                        <th data-type="date" data-format="YYYY/DD/MM">Quiz Date</th>
+                        <th>Action</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach (DataRow datarow in Model.Rows)
-                        {
-                            <tr>
-                                <td>@datarow["QuizID"]</td>
-                                <td>@datarow["QuizName"]</td>
-                                <td>@datarow["TotalQuestions"]</td>
-                                <td>@datarow["QuizDate"]</td>
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <a asp-action="EditQuiz" asp-controller="Quiz" asp-route-id="@datarow["QuizID"]" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil"></i></a>
-                                        <a asp-action="DeleteQuiz" asp-controller="Quiz" asp-route-id="@datarow["QuizID"]" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
+                    @foreach (DataRow datarow in Model.Rows)
+                    {
+                        <tr>
+                            <td>@datarow["QuizID"]</td>
+                            <td>@datarow["QuizName"]</td>
+                            <td>@datarow["TotalQuestions"]</td>
+                            <td>@datarow["QuizDate"]</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a asp-action="EditQuiz" asp-controller="Quiz" asp-route-id="@datarow["QuizID"]"
+                                       class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil"></i></a>
+                                    <a asp-action="DeleteQuiz" asp-controller="Quiz" asp-route-id="@datarow["QuizID"]"
+                                       class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
             </div>

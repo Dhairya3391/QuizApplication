@@ -1,4 +1,4 @@
-@model QuizApplication.Models.User
+@model User
 
 <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
     <div class="container">
@@ -27,7 +27,8 @@
                             <div class="alert alert-success">@TempData["Success"]</div>
                         }
 
-                        <form asp-action="Register" asp-controller="Auth" method="post" class="row g-3 needs-validation" novalidate>
+                        <form asp-action="Register" asp-controller="Auth" method="post" class="row g-3 needs-validation"
+                              novalidate>
                             @Html.AntiForgeryToken()
 
                             <div class="col-12">
@@ -64,7 +65,8 @@
                                 <button class="btn btn-primary w-100" type="submit">Create Account</button>
                             </div>
                             <div class="col-12">
-                                <p class="small mb-0">Already have an account? <a asp-action="Login" asp-controller="Auth">Log in</a></p>
+                                <p class="small mb-0">Already have an account? <a asp-action="Login"
+                                                                                  asp-controller="Auth">Log in</a></p>
                             </div>
                         </form>
                     </div>
@@ -75,5 +77,5 @@
 </section>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
 }

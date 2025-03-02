@@ -1,10 +1,11 @@
-﻿@model DataTable
-@using System.Data
+﻿@using System.Data
+@model System.Data.DataTable
 <div class="pagetitle">
     <h1>Question Level List</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="QuestionLevelList" asp-controller="QuestionLevel">QuestionLevel</a></li>
+            <li class="breadcrumb-item"><a asp-action="QuestionLevelList"
+                                           asp-controller="QuestionLevel">QuestionLevel</a></li>
             <li class="breadcrumb-item active">Question Level List</li>
         </ol>
     </nav>
@@ -41,30 +42,34 @@
                 <table class="table datatable">
 
                     <thead>
-                        <tr>
-                            <th>QuestionLevelID</th>
-                            <th>QuestionLevel</th>
-                            <th>User Name</th>
-                
-                            <th>Action</th>
-                        </tr>
+                    <tr>
+                        <th>QuestionLevelID</th>
+                        <th>QuestionLevel</th>
+                        <th>User Name</th>
+
+                        <th>Action</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach (DataRow datarow in Model.Rows)
-                        {
-                            <tr>
-                                <td>@datarow["QuestionLevelID"]</td>
-                                <td>@datarow["QuestionLevel"]</td>
-                                <td>@datarow["UserName"]</td>
-                            
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <a asp-action="EditQuestionLevel" asp-controller="QuestionLevel" asp-route-id="@datarow["QuestionLevelId"]" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
-                                        <a asp-action="DeleteQuestionLevel" asp-controller="QuestionLevel" asp-route-id="@datarow["QuestionLevelId"]" class="btn btn-danger btn-sm" title="Remove question"><i class="bi bi-trash"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        }
+                    @foreach (DataRow datarow in Model.Rows)
+                    {
+                        <tr>
+                            <td>@datarow["QuestionLevelID"]</td>
+                            <td>@datarow["QuestionLevel"]</td>
+                            <td>@datarow["UserName"]</td>
+
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a asp-action="EditQuestionLevel" asp-controller="QuestionLevel"
+                                       asp-route-id="@datarow["QuestionLevelId"]" class="btn btn-primary btn-sm"
+                                       title="Upload new profile image"><i class="bi bi-pencil"></i></a>
+                                    <a asp-action="DeleteQuestionLevel" asp-controller="QuestionLevel"
+                                       asp-route-id="@datarow["QuestionLevelId"]" class="btn btn-danger btn-sm"
+                                       title="Remove question"><i class="bi bi-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
 
