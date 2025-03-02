@@ -22,8 +22,7 @@
                     {
                         <div class="alert alert-danger d-flex justify-content-between">
                             @TempData["ErrorMessage"]
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                                    style="background-size:50%"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background-size:50%"></button>
                         </div>
                     }
                 </div>
@@ -33,31 +32,31 @@
                     @Html.HiddenFor(m => m.QuizID)
 
                     <div class="col-md-6">
-                        @Html.TextBoxFor(m => m.QuizName, new { @class = "form-control border border-black", placeholder = "Quiz Name" })
+                        @Html.TextBoxFor(m => m.QuizName, new { @class = "form-control border border-black", @placeholder = "Quiz Name" })
                         @Html.ValidationMessageFor(m => m.QuizName, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-md-6">
-                        @Html.TextBoxFor(m => m.TotalQuestions, new { @class = "form-control border border-black", placeholder = "Total Questions", type = "number" })
+                        @Html.TextBoxFor(m => m.TotalQuestions, new { @class = "form-control border border-black", @placeholder = "Total Questions", @type = "number" })
                         @Html.ValidationMessageFor(m => m.TotalQuestions, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-md-6">
-                        @Html.TextBoxFor(m => m.QuizDate, new { @class = "form-control border border-black", placeholder = "Quiz Date", type = "date" })
+                        @Html.TextBoxFor(m => m.QuizDate, new { @class = "form-control border border-black", @placeholder = "Quiz Date", @type = "date" })
                         @Html.ValidationMessageFor(m => m.QuizDate, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-md-6">
-                        @Html.TextBoxFor(m => m.UserID, new { @class = "form-control border border-black", placeholder = "User ID", type = "number" })
+                        @Html.TextBoxFor(m => m.UserID, new { @class = "form-control border border-black", @placeholder = "User ID", @type = "number" })
                         @Html.ValidationMessageFor(m => m.UserID, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-md-6">
-                        @Html.TextBoxFor(m => m.Created, new { @class = "form-control border border-black", placeholder = "Created", @readonly = "readonly" })
+                        @Html.TextBoxFor(m => m.Created, new { @class = "form-control border border-black", @placeholder = "Created", @readonly = "readonly" })
                     </div>
 
                     <div class="col-md-6">
-                        @Html.TextBoxFor(m => m.Modified, new { @class = "form-control border border-black", placeholder = "Modified", @readonly = "readonly" })
+                        @Html.TextBoxFor(m => m.Modified, new { @class = "form-control border border-black", @placeholder = "Modified", @readonly = "readonly" })
                     </div>
 
                     <div class="text-start">

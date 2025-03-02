@@ -1,4 +1,5 @@
-﻿<style type="text/css">
+﻿
+<style type="text/css">
     .app {
         border: 5px solid black;
         background: #ffffff;
@@ -9,23 +10,23 @@
         padding: 20px;
     }
 
-    .app h1 {
-        font-size: 25px;
-        color: #001e4d;
-        font-weight: 600;
-        border-bottom: 1px solid #333;
-        text-align: center;
-    }
+        .app h1 {
+            font-size: 25px;
+            color: #001e4d;
+            font-weight: 600;
+            border-bottom: 1px solid #333;
+            text-align: center;
+        }
 
     .quiz {
         padding: 20px 0;
     }
 
-    .quiz h2 {
-        font-size: 18px;
-        color: #001e4d;
-        font-weight: 600;
-    }
+        .quiz h2 {
+            font-size: 18px;
+            color: #001e4d;
+            font-weight: 600;
+        }
 
     .btn {
         background: #fff;
@@ -40,14 +41,14 @@
         cursor: pointer;
     }
 
-    .btn:hover:not([disabled]) {
-        background: #222;
-        color: #fff;
-    }
+        .btn:hover:not([disabled]) {
+            background: #222;
+            color: #fff;
+        }
 
-    .btn:disabled {
-        cursor: no-drop;
-    }
+        .btn:disabled {
+            cursor: no-drop;
+        }
 
     #next-btn {
         background: #001e4d;
@@ -86,41 +87,41 @@
 </div>
 
 <script type="text/javascript">
-    const questions = [
+        const questions = [
         {
             question: "Inside which HTML element do we put the JavaScript?",
             answers: [
-                {text: "&lt;script&gt;", correct: true},
-                {text: "&lt;scripting&gt;", correct: false},
-                {text: "&lt;javascript&gt;", correct: false},
-                {text: "&lt;js&gt;", correct: false},
+                { text: "&lt;script&gt;", correct: true },
+                { text: "&lt;scripting&gt;", correct: false },
+                { text: "&lt;javascript&gt;", correct: false },
+                { text: "&lt;js&gt;", correct: false },
             ]
         },
         {
             question: "Which of the following keywords is used to define a variable in Javascript?",
             answers: [
-                {text: "var", correct: false},
-                {text: "let", correct: false},
-                {text: "Both A and B", correct: true},
-                {text: "None of the above", correct: false},
+                { text: "var", correct: false },
+                { text: "let", correct: false },
+                { text: "Both A and B", correct: true },
+                { text: "None of the above", correct: false },
             ]
         },
         {
             question: "What is the result of '5' + 3 in JavaScript?",
             answers: [
-                {text: "8", correct: false},
-                {text: "53", correct: true},
-                {text: "15", correct: false},
-                {text: "NaN", correct: false},
+                { text: "8", correct: false },
+                { text: "53", correct: true },
+                { text: "15", correct: false },
+                { text: "NaN", correct: false },
             ]
         },
         {
             question: "Which function is used to print a message to the console in JavaScript?",
             answers: [
-                {text: "print()", correct: false},
-                {text: "console.log()", correct: true},
-                {text: "alert()", correct: false},
-                {text: "log()", correct: false},
+                { text: "print()", correct: false },
+                { text: "console.log()", correct: true },
+                { text: "alert()", correct: false },
+                { text: "log()", correct: false },
             ]
         }
     ];

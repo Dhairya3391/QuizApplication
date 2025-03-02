@@ -38,34 +38,26 @@ app.UseSession();
 app.UseStaticFiles();
 app.UseAuthorization();
 
-// Middleware to restrict access
 app.Use(async (context, next) =>
 {
-    var path = context.Request.Path.Value.ToLower();
-    System.Diagnostics.Debug.WriteLine($"Request path: {path}");
-    
+    var path = context.Request.Path.Value!.ToLower();
+
     if (path.StartsWith("/css") || path.StartsWith("/assets") || path.StartsWith("/js"))
     {
-        System.Diagnostics.Debug.WriteLine("Static file request, skipping middleware");
         await next.Invoke();
         return;
     }
 
-    bool isLogin = path == "/auth/login" || path.StartsWith("/auth/login/");
-    bool isRegister = path == "/auth/register" || path.StartsWith("/auth/register/");
+    bool isAuthRoute = path.StartsWith("/auth/");
     bool isLoggedIn = context.Session.GetInt32("UserId").HasValue;
 
-    System.Diagnostics.Debug.WriteLine($"IsLogin: {isLogin}, IsRegister: {isRegister}, IsLoggedIn: {isLoggedIn}");
-
-    if (isLogin || isRegister || isLoggedIn)
+    if (isAuthRoute || isLoggedIn)
     {
-        System.Diagnostics.Debug.WriteLine("Allowing request");
         await next.Invoke();
     }
     else
     {
-        System.Diagnostics.Debug.WriteLine("Redirecting to /Auth/Login");
-        context.Response.Redirect("/Auth/Login");
+        context.Response.Redirect("/Auth/Register");
     }
 });
 

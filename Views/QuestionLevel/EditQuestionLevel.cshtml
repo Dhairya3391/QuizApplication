@@ -22,8 +22,7 @@
                     {
                         <div class="alert alert-danger d-flex justify-content-between">
                             @TempData["ErrorMessage"]
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                                    style="background-size:50%"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background-size:50%"></button>
                         </div>
                     }
                 </div>
@@ -33,21 +32,21 @@
                     @Html.HiddenFor(m => m.QuestionLevelID)
 
                     <div class="col-md-6">
-                        @Html.TextBoxFor(m => m.QuestionLevel, new { @class = "form-control border border-black", placeholder = "Question Level" })
+                        @Html.TextBoxFor(m => m.QuestionLevel, new { @class = "form-control border border-black", @placeholder = "Question Level" })
                         @Html.ValidationMessageFor(m => m.QuestionLevel, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-md-6">
-                        @Html.TextBoxFor(m => m.UserID, new { @class = "form-control border border-black", placeholder = "User ID", type = "number" })
+                        @Html.TextBoxFor(m => m.UserID, new { @class = "form-control border border-black", @placeholder = "User ID", @type = "number" })
                         @Html.ValidationMessageFor(m => m.UserID, "", new { @class = "text-danger" })
                     </div>
 
                     <div class="col-md-6">
-                        @Html.TextBoxFor(m => m.Created, new { @class = "form-control border border-black", placeholder = "Created", @readonly = "readonly" })
+                        @Html.TextBoxFor(m => m.Created, new { @class = "form-control border border-black", @placeholder = "Created", @readonly = "readonly" })
                     </div>
 
                     <div class="col-md-6">
-                        @Html.TextBoxFor(m => m.Modified, new { @class = "form-control border border-black", placeholder = "Modified", @readonly = "readonly" })
+                        @Html.TextBoxFor(m => m.Modified, new { @class = "form-control border border-black", @placeholder = "Modified", @readonly = "readonly" })
                     </div>
 
                     <div class="text-start">
