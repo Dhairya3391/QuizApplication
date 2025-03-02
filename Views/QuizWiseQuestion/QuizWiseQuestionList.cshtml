@@ -32,6 +32,24 @@
                     </div>
                 </form><!-- End No Labels Form -->
             </div>
+
+            <div class="p-2">
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success d-flex justify-content-between">
+                        @TempData["SuccessMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background-size:50%"></button>
+                    </div>
+                }
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger d-flex justify-content-between">
+                        @TempData["ErrorMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background-size:50%"></button>
+                    </div>
+                }
+            </div>
+
         </div>
 
         <div class="card">

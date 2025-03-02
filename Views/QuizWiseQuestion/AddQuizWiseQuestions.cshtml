@@ -1,5 +1,8 @@
 ﻿@model DataTable
 @using System.Data
+@{
+    List<int> addedQuestions = ViewBag.AddedQuestions as List<int> ?? new List<int>();
+}
 
 <div class="pagetitle">
     <h1>Quiz Wise Question Add</h1>
@@ -9,26 +12,27 @@
             <li class="breadcrumb-item active">Add Quiz Wise Questions</li>
         </ol>
     </nav>
-</div><!-- End Page Title -->
+</div>
 
 <section class="section">
     <div class="row">
-
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Quiz Name: @ViewBag.QuizName</h5>
-                <p>Total Questions Allowed: @ViewBag.TotalQuestions</p>
-                <p>Selected Questions: <span data-selected-questions-count="1">1</span></p>
+                <p>Total Questions Allowed: <span id="totalQuestions">@ViewBag.TotalQuestions</span></p>
+                <p>Selected Questions: <span id="selectedQuestionsCount">0</span></p>
             </div>
         </div>
 
         <div class="card">
             <div class="card-body">
-                <form>
+                <form id="quizForm" method="post" asp-action="SaveQuizQuestions" asp-controller="QuizWiseQuestion">
+                    <input type="hidden" name="quizId" value="@ViewBag.QuizId" />
+
                     <table class="table">
                         <thead>
                             <tr>
-                                <th><input type="checkbox"/></th>
+                                <th><input type="checkbox" id="selectAll" /></th>
                                 <th>Question</th>
                                 <th>Option A</th>
                                 <th>Option B</th>
@@ -40,11 +44,16 @@
                         </thead>
 
                         <tbody>
-
                             @foreach (DataRow datarow in Model.Rows)
                             {
+                                int questionId = Convert.ToInt32(datarow["QuestionId"]);
+                                bool isChecked = addedQuestions.Contains(questionId);
+
                                 <tr>
-                                    <td><input type="checkbox" name="questions[]" value="@datarow["QuestionId"]"/></td>
+                                    <td>
+                                        <input type="checkbox" class="question-checkbox" name="selectedQuestions"
+                                               value="@questionId" @(isChecked ? "checked" : "") />
+                                    </td>
                                     <td>@datarow["QuestionText"]</td>
                                     <td>@datarow["OptionA"]</td>
                                     <td>@datarow["OptionB"]</td>
@@ -58,7 +67,7 @@
                     </table>
 
                     <div class="text-start">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Save</button>
                         <a href="@Url.Action("QuizWiseQuestionList", "QuizWiseQuestion")" class="btn btn-secondary">Cancel</a>
                     </div>
                 </form>
@@ -68,7 +77,36 @@
 </section>
 
 <script>
-    $(function() {
-        console.log( "ready!" );
+    document.addEventListener("DOMContentLoaded", function () {
+        let totalAllowed = parseInt(document.getElementById("totalQuestions").innerText);
+        let checkboxes = document.querySelectorAll(".question-checkbox");
+        let selectedCountSpan = document.getElementById("selectedQuestionsCount");
+        let submitBtn = document.getElementById("submitBtn");
+        let selectAllCheckbox = document.getElementById("selectAll");
+
+        function updateSelectedCount() {
+            let selectedCount = document.querySelectorAll(".question-checkbox:checked").length;
+            selectedCountSpan.innerText = selectedCount;
+            submitBtn.disabled = selectedCount === 0;
+        }
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener("change", function () {
+                if (this.checked && document.querySelectorAll(".question-checkbox:checked").length > totalAllowed) {
+                    alert("You cannot select more than " + totalAllowed + " questions.");
+                    this.checked = false;
+                }
+                updateSelectedCount();
+            });
+        });
+
+        selectAllCheckbox.addEventListener("change", function () {
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked && document.querySelectorAll(".question-checkbox:checked").length < totalAllowed;
+            });
+            updateSelectedCount();
+        });
+
+        updateSelectedCount();
     });
 </script>

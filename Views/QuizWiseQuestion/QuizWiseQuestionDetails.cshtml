@@ -58,7 +58,9 @@
                                 <td>@datarow["CorrectOption"]</td>
                                 <td>@datarow["QuestionMarks"]</td>
                                 <td>
-                                    <a href="#" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
+                                    <a asp-action="DeleteQuizWiseQuestion" asp-controller="QuizWiseQuestion" asp-route-quizWiseQuestionID="@datarow["QuizWiseQuestionsID"]" class="btn btn-danger btn-sm" title="Delete">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
                                 </td>
                             </tr>
                         }
