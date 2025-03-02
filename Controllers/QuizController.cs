@@ -28,6 +28,26 @@ namespace QuizApplication.Controllers
         {
             return View(_dbConfiguration.GetAllData("PR_Quiz_SelectAll"));
         }
+        
+        [HttpGet]
+        public IActionResult QuizList(string quizName = null, int? totalQuestion = null, DateTime? quizDate = null)
+        {
+            DataTable dt;
+            if (!string.IsNullOrEmpty(quizName) || totalQuestion.HasValue || quizDate.HasValue)
+            {
+                dt = _quizCRUD.SearchQuizzes(quizName, totalQuestion, quizDate);
+            }
+            else
+            {
+                dt = _dbConfiguration.GetAllData("PR_Quiz_SelectAll");
+            }
+            
+            ViewBag.QuizName = quizName;
+            ViewBag.TotalQuestion = totalQuestion;
+            ViewBag.QuizDate = quizDate;
+
+            return View(dt);
+        }
 
         // POST: Add a new quiz
         [HttpPost]
@@ -109,6 +129,13 @@ namespace QuizApplication.Controllers
                 TempData["ErrorMessage"] = "Error while deleting quiz.";
             }
             return RedirectToAction("QuizList");
+        }
+        
+        [HttpPost]
+        public JsonResult SearchQuizzes(string quizName, int? totalQuestion, DateTime? quizDate)
+        {
+            DataTable dt = _quizCRUD.SearchQuizzes(quizName, totalQuestion, quizDate);
+            return Json(new { data = dt.AsEnumerable().Select(r => r.ItemArray) });
         }
     }
 }

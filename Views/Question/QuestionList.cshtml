@@ -1,6 +1,131 @@
-﻿@model DataTable
-@using System.Data
+﻿@* @model DataTable *@
+@* @using System.Data *@
+@* *@
+@* *@
+@* <style> *@
+@*     .table td, .table th { *@
+@*         white-space: normal;    /* Allows text to wrap instead of staying on one line */ *@
+@*         word-wrap: break-word;  /* Breaks long words to fit within the cell */ *@
+@*     } *@
+@* </style> *@
+@* *@
+@* <script type="text/javascript" charset="UTF-8"> *@
+@*     $(document).ready(function() { *@
+@*         $('.datatable').DataTable({ *@
+@*             responsive: true    /* Enables responsive features like collapsing columns on small screens */ *@
+@*         }); *@
+@*     }); *@
+@* </script> *@
+@* *@
+@* <div class="pagetitle"> *@
+@*     <h1>Question List</h1> *@
+@*     <nav> *@
+@*         <ol class="breadcrumb"> *@
+@*             <li class="breadcrumb-item"><a asp-action="QuestionList" asp-controller="Question">Question</a></li> *@
+@*             <li class="breadcrumb-item active">Question List</li> *@
+@*         </ol> *@
+@*     </nav> *@
+@* </div><!-- End Page Title --> *@
+@* *@
+@* <section class="section"> *@
+@*     <div class="row"> *@
+@*         <div class="card"> *@
+@*             <div class="card-body"> *@
+@*                 <h5 class="card-title">Search Question</h5> *@
+@*                 <!-- No Labels Form --> *@
+@*                 <form class="row g-3"> *@
+@*                     <div class="col-md-4"> *@
+@*                         <input type="text" class="form-control" placeholder="Question Text"> *@
+@*                     </div> *@
+@*                     <div class="col-md-4"> *@
+@*                         <input type="text" class="form-control" placeholder="Correct Options"> *@
+@*                     </div> *@
+@*                     <div class="col-md-4"> *@
+@*                         <input type="number" class="form-control" placeholder="Question Marks"> *@
+@*                     </div> *@
+@*                     <div class="text-start"> *@
+@*                         <button type="submit" class="btn btn-primary">Search</button> *@
+@*                         <button type="reset" class="btn btn-secondary">Reset</button> *@
+@*                     </div> *@
+@*                 </form><!-- End No Labels Form --> *@
+@*                 <br> *@
+@* *@
+@*                 <div class="p-2"> *@
+@*                     @if (TempData["SuccessMessage"] != null) *@
+@*                     { *@
+@*                         <div class="alert alert-success d-flex justify-content-between"> *@
+@*                             @TempData["SuccessMessage"] *@
+@*                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background-size:50%"></button> *@
+@*                         </div> *@
+@*                     } *@
+@*                     @if (TempData["ErrorMessage"] != null) *@
+@*                     { *@
+@*                         <div class="alert alert-danger d-flex justify-content-between"> *@
+@*                             @TempData["ErrorMessage"] *@
+@*                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background-size:50%"></button> *@
+@*                         </div> *@
+@*                     } *@
+@*                 </div> *@
+@* *@
+@*                 <h2 class="card-title">Question List</h2> *@
+@*                 <div class="d-flex p-3 justify-content-end"> *@
+@*                     <a asp-action="QuestionForm" asp-controller="Question" class="btn btn-primary w-20"> *@
+@*                         <i class="bi bi-plus"></i> Add Question *@
+@*                     </a> *@
+@*                 </div> *@
+@*                 <div class="table-responsive"> *@
+@*                     <table class="table datatable"> *@
+@*                         <thead> *@
+@*                         <tr> *@
+@*                             <th> *@
+@*                                 <b>Q</b>uestion ID *@
+@*                             </th> *@
+@*                             <th>Question Level</th> *@
+@*                             <th>Question Text</th> *@
+@*                             <th>Option A</th> *@
+@*                             <th>Option B</th> *@
+@*                             <th>Option C</th> *@
+@*                             <th>Option D</th> *@
+@*                             <th>Correct Option</th> *@
+@*                             <th>Question Marks</th> *@
+@*                             <th>User Name</th> *@
+@*                             <th>Action</th> *@
+@*                         </tr> *@
+@*                         </thead> *@
+@*                         <tbody> *@
+@*                         @foreach (DataRow datarow in Model.Rows) *@
+@*                         { *@
+@*                             <tr> *@
+@*                                 <td>@datarow["QuestionId"]</td> *@
+@*                                 <td>@datarow["QuestionLevel"]</td> *@
+@*                                 <td>@datarow["QuestionText"]</td> *@
+@*                                 <td>@datarow["OptionA"]</td> *@
+@*                                 <td>@datarow["OptionB"]</td> *@
+@*                                 <td>@datarow["OptionC"]</td> *@
+@*                                 <td>@datarow["OptionD"]</td> *@
+@*                                 <td>@datarow["CorrectOption"]</td> *@
+@*                                 <td>@datarow["QuestionMarks"]</td> *@
+@*                                 <td>@datarow["UserName"]</td> *@
+@*                               *@
+@*                                 <td> *@
+@*                                     <div class="d-flex gap-2"> *@
+@*                                         <a asp-action="editQuestion" asp-controller="Question" asp-route-id="@datarow["QuestionId"]" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a> *@
+@*                                         <a asp-action="deleteQuestion" asp-controller="Question" asp-route-id="@datarow["QuestionId"]" class="btn btn-danger btn-sm" title="Remove question"><i class="bi bi-trash"></i></a> *@
+@*                                     </div> *@
+@* *@
+@*                                 </td> *@
+@*                             </tr> *@
+@*                         } *@
+@*                         </tbody> *@
+@*                     </table> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </section> *@
 
+@model DataTable
+@using System.Data
 
 <style>
     .table td, .table th {
@@ -8,14 +133,6 @@
         word-wrap: break-word;  /* Breaks long words to fit within the cell */
     }
 </style>
-
-<script type="text/javascript" charset="UTF-8">
-    $(document).ready(function() {
-        $('.datatable').DataTable({
-            responsive: true    /* Enables responsive features like collapsing columns on small screens */
-        });
-    });
-</script>
 
 <div class="pagetitle">
     <h1>Question List</h1>
@@ -33,19 +150,19 @@
             <div class="card-body">
                 <h5 class="card-title">Search Question</h5>
                 <!-- No Labels Form -->
-                <form class="row g-3">
+                <form class="row g-3" asp-action="QuestionList" asp-controller="Question" method="get">
                     <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="Question Text">
+                        <input type="text" class="form-control" name="questionText" placeholder="Question Text" value="@ViewBag.QuestionText">
                     </div>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" placeholder="Correct Options">
+                        <input type="text" class="form-control" name="correctOptions" placeholder="Correct Options" value="@ViewBag.CorrectOptions">
                     </div>
                     <div class="col-md-4">
-                        <input type="number" class="form-control" placeholder="Question Marks">
+                        <input type="number" class="form-control" name="questionMarks" placeholder="Question Marks" value="@ViewBag.QuestionMarks">
                     </div>
                     <div class="text-start">
                         <button type="submit" class="btn btn-primary">Search</button>
-                        <button type="reset" class="btn btn-secondary">Reset</button>
+                        <button type="reset" class="btn btn-secondary" onclick="resetForm()">Reset</button>
                     </div>
                 </form><!-- End No Labels Form -->
                 <br>
@@ -74,48 +191,44 @@
                     </a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table datatable">
+                    <table class="table">
                         <thead>
-                        <tr>
-                            <th>
-                                <b>Q</b>uestion ID
-                            </th>
-                            <th>Question Level</th>
-                            <th>Question Text</th>
-                            <th>Option A</th>
-                            <th>Option B</th>
-                            <th>Option C</th>
-                            <th>Option D</th>
-                            <th>Correct Option</th>
-                            <th>Question Marks</th>
-                            <th>User Name</th>
-                            <th>Action</th>
-                        </tr>
+                            <tr>
+                                <th>Question ID</th>
+                                <th>Question Level</th> <!-- Updated from QuestionLevelID to QuestionLevel -->
+                                <th>Question Text</th>
+                                <th>Option A</th>
+                                <th>Option B</th>
+                                <th>Option C</th>
+                                <th>Option D</th>
+                                <th>Correct Option</th>
+                                <th>Question Marks</th>
+                                <th>UserID</th>
+                                <th>Action</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @foreach (DataRow datarow in Model.Rows)
-                        {
-                            <tr>
-                                <td>@datarow["QuestionId"]</td>
-                                <td>@datarow["QuestionLevel"]</td>
-                                <td>@datarow["QuestionText"]</td>
-                                <td>@datarow["OptionA"]</td>
-                                <td>@datarow["OptionB"]</td>
-                                <td>@datarow["OptionC"]</td>
-                                <td>@datarow["OptionD"]</td>
-                                <td>@datarow["CorrectOption"]</td>
-                                <td>@datarow["QuestionMarks"]</td>
-                                <td>@datarow["UserName"]</td>
-                             
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <a asp-action="editQuestion" asp-controller="Question" asp-route-id="@datarow["QuestionId"]" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
-                                        <a asp-action="deleteQuestion" asp-controller="Question" asp-route-id="@datarow["QuestionId"]" class="btn btn-danger btn-sm" title="Remove question"><i class="bi bi-trash"></i></a>
-                                    </div>
-
-                                </td>
-                            </tr>
-                        }
+                            @foreach (DataRow datarow in Model.Rows)
+                            {
+                                <tr>
+                                    <td>@datarow["QuestionID"]</td>
+                                    <td>@datarow["QuestionLevel"]</td> <!-- Updated from QuestionLevelID to QuestionLevel -->
+                                    <td>@datarow["QuestionText"]</td>
+                                    <td>@datarow["OptionA"]</td>
+                                    <td>@datarow["OptionB"]</td>
+                                    <td>@datarow["OptionC"]</td>
+                                    <td>@datarow["OptionD"]</td>
+                                    <td>@datarow["CorrectOption"]</td>
+                                    <td>@datarow["QuestionMarks"]</td>
+                                    <td>@datarow["UserID"]</td>
+                                    <td>
+                                        <div class="d-flex gap-2">
+                                            <a asp-action="editQuestion" asp-controller="Question" asp-route-id="@datarow["QuestionID"]" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil"></i></a>
+                                            <a asp-action="deleteQuestion" asp-controller="Question" asp-route-id="@datarow["QuestionID"]" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -123,3 +236,12 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        function resetForm() {
+            document.querySelector('form').reset();
+            window.location.href = '@Url.Action("QuestionList", "Question")';
+        }
+    </script>
+}

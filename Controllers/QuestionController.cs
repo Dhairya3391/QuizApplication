@@ -24,6 +24,27 @@ namespace QuizApplication.Controllers
         {
             return View(_dbConfiguration.GetAllData("PR_Question_SelectAll"));
         }
+        
+        [HttpGet]
+        public IActionResult QuestionList(string questionText = null, string correctOptions = null, int? questionMarks = null)
+        {
+            DataTable dt;
+            if (!string.IsNullOrEmpty(questionText) || !string.IsNullOrEmpty(correctOptions) || questionMarks.HasValue)
+            {
+                dt = questionCRUD.SearchQuestions(questionText, correctOptions, questionMarks);
+            }
+            else
+            {
+                dt = _dbConfiguration.GetAllData("PR_Question_SelectAll");
+            }
+        
+            // Set ViewBag for preserving search values
+            ViewBag.QuestionText = questionText;
+            ViewBag.CorrectOptions = correctOptions;
+            ViewBag.QuestionMarks = questionMarks;
+
+            return View(dt);
+        }
 
         [HttpPost]
         public ActionResult AddQuestion(QuestionModel model)
