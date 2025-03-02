@@ -88,5 +88,24 @@ namespace QuizApplication.QuizCRUD
                 return result > 0;
             }
         }
+        public DataTable SearchQuizzes(string quizName, int? totalQuestion, DateTime? quizDate)
+        {
+            string connectionString = configuration.GetConnectionString("ConnectionString");
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("PR_Quiz_Search", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@QuizName", (object)quizName ?? DBNull.Value);
+                command.Parameters.AddWithValue("@TotalQuestion", (object)totalQuestion ?? DBNull.Value);
+                command.Parameters.AddWithValue("@QuizDate", (object)quizDate ?? DBNull.Value);
+
+                SqlDataReader reader = command.ExecuteReader();
+                DataTable table = new DataTable();
+                table.Load(reader);
+                return table;
+            }
+        }
     }
 }

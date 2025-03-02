@@ -123,5 +123,24 @@ namespace QuizApplication.QuestionCRUD
             return result > 0;
         }
 
+        public DataTable SearchQuestions(string questionText, string correctOptions, int? questionMarks)
+        {
+            string connectionString = configuration.GetConnectionString("ConnectionString");
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("PR_Question_Search", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@QuestionText", (object)questionText ?? DBNull.Value);
+                command.Parameters.AddWithValue("@CorrectOptions", (object)correctOptions ?? DBNull.Value);
+                command.Parameters.AddWithValue("@QuestionMarks", (object)questionMarks ?? DBNull.Value);
+
+                SqlDataReader reader = command.ExecuteReader();
+                DataTable table = new DataTable();
+                table.Load(reader);
+                return table;
+            }
+        }
     }
 }

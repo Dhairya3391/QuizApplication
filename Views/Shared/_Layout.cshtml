@@ -1,19 +1,13 @@
-﻿@using Microsoft.AspNetCore.Http
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - QuizApplication</title>
-    <!-- Favicons -->
     <link href="~/assets/img/favicon.png" rel="icon">
     <link href="~/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
     <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
     <link href="~/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -21,46 +15,35 @@
     <link href="~/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
     <link href="~/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="~/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-
-    <!-- Template Main CSS File -->
     <link href="~/assets/css/style.css" rel="stylesheet">
-    <!-- Add dark mode CSS -->
-    <link href="~/css/dark-mode.css" rel="stylesheet" />
 </head>
 <body>
-    <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
         <div class="d-flex align-items-center justify-content-between">
             <a asp-action="Index" asp-controller="Home" class="logo d-flex align-items-center">
                 <span class="d-none d-lg-block">Quiz Management</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
-        </div><!-- End Logo -->
-
+        </div>
         <div class="search-bar">
             <form class="search-form d-flex align-items-center" method="POST" action="#">
                 <input type="text" name="query" placeholder="Search" title="Enter search keyword">
                 <button type="submit" title="Search"><i class="bi bi-search"></i></button>
             </form>
-        </div><!-- End Search Bar -->
-
+        </div>
         <nav class="header-nav ms-auto">
             <ul class="d-flex align-items-center">
                 <li class="nav-item d-block d-lg-none">
-                    <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <a class="nav-link nav-icon search-bar-toggle" href="#">
                         <i class="bi bi-search"></i>
                     </a>
-                </li><!-- End Search Icon-->
-
+                </li>
                 <li class="nav-item">
-                    <button class="btn btn-dark">
                         @await Html.PartialAsync("_ThemeToggle")
-                    </button>
                 </li>
                 <li class="nav-item dropdown pe-3">
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="~/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                        @* <img src="~/assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> *@
                         <span class="d-none d-md-block dropdown-toggle ps-2">
                             @(Context.Session.GetString("Username") ?? "Guest")
                         </span>
@@ -94,21 +77,18 @@
                                 <i class="bi bi-box-arrow-right"></i><span>Sign Out</span>
                             </a>
                         </li>
-                    </ul><!-- End Profile Dropdown Items -->
-                </li><!-- End Profile Nav -->
+                    </ul>
+                </li>
             </ul>
-        </nav><!-- End Icons Navigation -->
-    </header><!-- End Header -->
-
-    <!-- ======= Sidebar ======= -->
+        </nav>
+    </header>
     <aside id="sidebar" class="sidebar">
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
                 <a class="nav-link collapsed" asp-action="Index" asp-controller="Home">
                     <i class="bi bi-grid"></i><span>Dashboard</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
-
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-menu-button-wide"></i><span>Quiz</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -125,8 +105,7 @@
                         </a>
                     </li>
                 </ul>
-            </li><!-- End Quiz Nav -->
-
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-journal-text"></i><span>Question</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -143,8 +122,7 @@
                         </a>
                     </li>
                 </ul>
-            </li><!-- End Question Nav -->
-
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-layout-text-window-reverse"></i><span>Question Level</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -161,8 +139,7 @@
                         </a>
                     </li>
                 </ul>
-            </li><!-- End Question Level Nav -->
-
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-bar-chart"></i><span>Quiz Wise Question</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -179,8 +156,7 @@
                         </a>
                     </li>
                 </ul>
-            </li><!-- End Quiz Wise Question Nav -->
-
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-person"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -197,44 +173,30 @@
                         </a>
                     </li>
                 </ul>
-            </li><!-- End User Nav -->
-
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" asp-action="Login" asp-controller="Auth">
                     <i class="bi bi-book"></i><span>Login</span>
                 </a>
-            </li><!-- End Login Page Nav -->
-
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" asp-action="Register" asp-controller="Auth">
                     <i class="bi bi-book"></i><span>Register</span>
                 </a>
-            </li><!-- End Register Page Nav -->
+            </li>
         </ul>
-    </aside><!-- End Sidebar-->
-
+    </aside>
     <div>
         <main id="main" class="main">
             @RenderBody()
         </main>
     </div>
-
-    <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
             © Copyright <strong><span>Quiz Management</span></strong>. All Rights Reserved
         </div>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-        </div>
-    </footer><!-- End Footer -->
-
+    </footer>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Vendor JS Files -->
     <script src="~/assets/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/assets/vendor/chart.js/chart.umd.js"></script>
@@ -243,22 +205,18 @@
     <script src="~/assets/vendor/simple-datatables/simple-datatables.js"></script>
     <script src="~/assets/vendor/tinymce/tinymce.min.js"></script>
     <script src="~/assets/vendor/php-email-form/validate.js"></script>
-
-    <!-- Template Main JS File -->
     <script src="~/assets/js/main.js"></script>
-    <script src="~/assets/js/dark-mode.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 
-    <!-- Optional: Highlight active link -->
-    <script>
+<script>
         document.addEventListener("DOMContentLoaded", function() {
             var currentUrl = window.location.href;
             var links = document.querySelectorAll("#sidebar-nav a");
-
             links.forEach(function(link) {
                 if (link.href === currentUrl) {
                     link.classList.add("active");
-
-                    // Find and expand the parent dropdown
                     var parentDropdown = link.closest('.nav-item');
                     if (parentDropdown) {
                         var collapseElement = parentDropdown.querySelector('.nav-content');
@@ -275,18 +233,6 @@
             });
         });
     </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var currentUrl = window.location.href;
-            var links = document.querySelectorAll("#sidebar-nav a");
-            links.forEach(function(link) {
-                if (link.href === currentUrl) {
-                    link.classList.add("active");
-                }
-            });
-        });
-    </script>
-
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
