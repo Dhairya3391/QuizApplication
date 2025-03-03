@@ -1,4 +1,6 @@
-﻿@* Dashboard Title and Breadcrumb *@
+﻿@model QuizApplication.Models.DashboardViewModel
+
+@* Dashboard Title and Breadcrumb *@
 <div class="pagetitle">
     <h1>Dashboard</h1>
     <nav>
@@ -21,44 +23,43 @@
 </div>
 
 <section class="section dashboard">
-    
     <div class="row">
         <div class="col-xxl-4 col-md-6">
             <div class="card info-card sales-card">
                 <div class="card-body">
-                    <h5 class="card-title">Quiz</h5>
+                    <h5 class="card-title">Quizzes</h5>
                     <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                             <i class="bi bi-book"></i>
                         </div>
                         <div class="ps-3">
-                            <h6>145</h6>
-                            <span class="text-success small pt-1 fw-bold">12%</span>
-                            <span class="text-muted small pt-2 ps-1">increase</span>
+                            <h6>@Model.TotalQuizzes</h6>
+                            <span class="text-muted small pt-1 fw-bold">N/A</span>
+                            <span class="text-muted small pt-2 ps-1">change</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="col-xxl-4 col-md-6">
             <div class="card info-card revenue-card">
                 <div class="card-body">
-                    <h5 class="card-title">Question</h5>
+                    <h5 class="card-title">Questions</h5>
                     <div class="d-flex align-items-center">
                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                             <i class="bi bi-question-circle"></i>
                         </div>
                         <div class="ps-3">
-                            <h6>3,264</h6>
-                            <span class="text-success small pt-1 fw-bold">8%</span>
-                            <span class="text-muted small pt-2 ps-1">increase</span>
+                            <h6>@Model.TotalQuestions</h6>
+                            <span class="text-muted small pt-1 fw-bold">N/A</span>
+                            <span class="text-muted small pt-2 ps-1">change</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="col-xxl-4 col-xl-12">
             <div class="card info-card customers-card">
                 <div class="card-body">
@@ -68,58 +69,56 @@
                             <i class="bi bi-people"></i>
                         </div>
                         <div class="ps-3">
-                            <h6>1244</h6>
-                            <span class="text-danger small pt-1 fw-bold">12%</span>
-                            <span class="text-muted small pt-2 ps-1">decrease</span>
+                            <h6>@Model.TotalUsers</h6>
+                            <span class="text-muted small pt-1 fw-bold">N/A</span>
+                            <span class="text-muted small pt-2 ps-1">change</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="row mt-4">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Recent Quizzes</h5>
-                    <p>
-                        Here you could list the most recent quizzes created, 
-                        or show a chart of quiz completions over time. 
-                        Replace this with your own data or "bullshit" as you see fit.
-                    </p>
-
-                    <!-- Example Chart Placeholder (e.g., using Chart.js) -->
+                    <h5 class="card-title">Top Quizzes by Question Count</h5>
+                    <p>Overview of the top 4 quizzes with the most questions.</p>
                     <canvas id="quizChart" style="max-height: 300px;"></canvas>
                 </div>
             </div>
         </div>
     </div>
-
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     var ctx = document.getElementById('quizChart').getContext('2d');
     var quizChart = new Chart(ctx, {
-        type: 'pie', // or 'line', 'pie', etc.
+        type: 'pie',
         data: {
-            labels: ['Quiz 1', 'Quiz 2', 'Quiz 3', 'Quiz 4'],
+            labels: [@Html.Raw("'" + string.Join("','", Model.RecentQuizAttempts.Select(q => q.QuizName)) + "'")],
             datasets: [{
-                label: 'Number of Attempts',
-                data: [12, 19, 3, 5],
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                borderColor: 'rgba(54, 162, 235, 1)',
+                label: 'Number of Questions',
+                data: [@Html.Raw(string.Join(",", Model.RecentQuizAttempts.Select(q => q.AttemptCount)))],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(255, 205, 86, 0.6)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 205, 86, 1)'
+                ],
                 borderWidth: 1
             }]
         },
         options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
+            responsive: true
         }
     });
 </script>

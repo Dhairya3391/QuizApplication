@@ -1,35 +1,26 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using QuizApplication.DbConfigruation;
-using QuizApplication.Models;
+using QuizApplication.Services;
 
 namespace QuizApplication.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        
-        public HomeController(ILogger<HomeController> logger)
+        private readonly DashboardService _dashboardService;
+
+        public HomeController(DashboardService dashboardService)
         {
-            _logger = logger;
+            _dashboardService = dashboardService;
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
-        public IActionResult QuizTesting()
-        {
-            return View();
-        }
-        public IActionResult Login()
-        {
-            return View();
-        }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            if (!HttpContext.Session.GetInt32("UserId").HasValue)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            var model = _dashboardService.GetDashboardData();
+            return View(model);
         }
     }
 }
