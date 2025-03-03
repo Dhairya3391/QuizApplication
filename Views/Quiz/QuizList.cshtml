@@ -1,7 +1,6 @@
 ﻿@using System.Data
 @model System.Data.DataTable
 
-
 <div class="pagetitle">
     <h1>Quiz List</h1>
     <nav>
@@ -10,14 +9,13 @@
             <li class="breadcrumb-item active">Quiz List</li>
         </ol>
     </nav>
-</div><!-- End Page Title -->
+</div>
 
 <section class="section">
     <div class="row">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Search Quiz</h5>
-                <!-- No Labels Form -->
                 <form class="row g-3" asp-action="QuizList" asp-controller="Quiz" method="get">
                     <div class="col-md-4">
                         <input type="text" class="form-control" name="quizName" placeholder="Quiz Name" value="@ViewBag.QuizName">
@@ -32,7 +30,7 @@
                         <button type="submit" class="btn btn-primary">Search</button>
                         <button type="reset" class="btn btn-secondary" onclick="resetForm()">Reset</button>
                     </div>
-                </form><!-- End No Labels Form -->
+                </form>
                 <br>
                 <h2 class="card-title">Quiz List</h2>
                 <div class="d-flex p-3 justify-content-end">
@@ -40,7 +38,7 @@
                         <i class="bi bi-plus"></i> Add Quiz
                     </a>
                 </div>
-                <table class="table">
+                <table class="table datatable">
                     <thead>
                         <tr>
                             <th>Quiz ID</th>

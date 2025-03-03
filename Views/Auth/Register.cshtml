@@ -56,12 +56,12 @@
                             <div class="alert alert-success">@TempData["Success"]</div>
                         }
 
-                        <form asp-action="Register" asp-controller="Auth" method="post" class="row g-3 needs-validation" novalidate>
+                        <form asp-action="Register" asp-controller="Auth" method="post" class="row g-3">
                             @Html.AntiForgeryToken()
 
                             <div class="col-12">
                                 <label asp-for="Username" class="form-label">Username</label>
-                                <input asp-for="Username" class="form-control" required>
+                                <input asp-for="Username" class="form-control">
                                 <span asp-validation-for="Username" class="invalid-feedback"></span>
                             </div>
 
@@ -79,13 +79,13 @@
 
                             <div class="col-12">
                                 <label asp-for="Password" class="form-label">Password</label>
-                                <input asp-for="Password" type="password" class="form-control" id="password" required>
+                                <input asp-for="Password" type="password" class="form-control" id="password">
                                 <span asp-validation-for="Password" class="invalid-feedback"></span>
                             </div>
 
                             <div class="col-12">
                                 <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
-                                <input asp-for="ConfirmPassword" type="password" class="form-control" id="confirmPassword" required>
+                                <input asp-for="ConfirmPassword" type="password" class="form-control" id="confirmPassword">
                                 <span asp-validation-for="ConfirmPassword" class="invalid-feedback"></span>
                             </div>
 
@@ -131,6 +131,12 @@
             }
         });
     </script>
-
+<script>
+    $(document).ready(function() {
+        $('form').on('submit', function() {
+            console.log('Form submitted!');
+        });
+    });
+</script>
 </body>
 </html>

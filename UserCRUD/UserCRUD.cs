@@ -7,14 +7,13 @@ namespace QuizApplication.UserCrud
     public class UserCrud
     {
         private readonly string _connectionString;
+        private IConfiguration _configuration;
 
         public UserCrud(IConfiguration configuration)
         {
             _connectionString = configuration.GetConnectionString("ConnectionString");
-            if (string.IsNullOrEmpty(_connectionString))
-            {
-                throw new ArgumentNullException(nameof(_connectionString), "Connection string 'DefaultConnection' not found.");
-            }
+            _configuration = configuration;
+
         }
 
         public bool RegisterUser(User user)
@@ -31,13 +30,16 @@ namespace QuizApplication.UserCrud
                 command.Parameters.AddWithValue("@Password", user.Password);
                 command.Parameters.AddWithValue("@Email", user.Email ?? (object)DBNull.Value);
                 command.Parameters.AddWithValue("@Mobile", user.Mobile ?? (object)DBNull.Value);
-                command.Parameters.AddWithValue("@IsActive", true);
-                command.Parameters.AddWithValue("@IsAdmin", false);
-                command.Parameters.AddWithValue("@Created", DateTime.Now);
-                command.Parameters.AddWithValue("@Modified", DateTime.Now);
 
-                int rowsAffected = command.ExecuteNonQuery();
-                return rowsAffected > 0;
+                try
+                {
+                    int rowsAffected = command.ExecuteNonQuery();
+                    return rowsAffected > 0;
+                }
+                catch (SqlException ex)
+                {
+                    throw new Exception($"Database error: {ex.Message}", ex);
+                }
             }
         }
 
@@ -69,6 +71,19 @@ namespace QuizApplication.UserCrud
                     }
                     return null;
                 }
+            }
+        }
+        public bool DeleteUser(int userId)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand("PR_User_DeleteByPk", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@UserID", userId);
+
+                int result = command.ExecuteNonQuery();
+                return result > 0;
             }
         }
     }

@@ -54,15 +54,46 @@
                                 <td>@datarow["IsAdmin"]</td>
                                
                                 <td>
-                                    <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                                    @* <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-pencil"></i></a> *@
+                                    @* <a asp-action="DeleteUser" asp-controller="User" asp-route-id="@datarow["UserID"]" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a> *@
+                                    @* <a asp-action="DeleteUser" asp-controller="User" asp-route-id="@datarow["UserID"]" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Are you sure you want to delete this user?');"><i class="bi bi-trash"></i></a> *@
+                                    <a asp-action="DeleteUser" asp-controller="User" asp-route-id="@datarow["UserID"]" class="btn btn-danger btn-sm delete-user" title="Delete"><i class="bi bi-trash"></i></a>
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>
 </section>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Select all elements with the 'delete-user' class
+        document.querySelectorAll('.delete-user').forEach(function (element) {
+            element.addEventListener('click', function (event) {
+                event.preventDefault(); // Stop the link from navigating immediately
+                var url = this.href; // Get the URL from the href attribute
+
+                // Show SweetAlert2 confirmation dialog
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If user confirms, navigate to the delete URL
+                        window.location.href = url;
+                    }
+                });
+            });
+        });
+    });
+</script>
