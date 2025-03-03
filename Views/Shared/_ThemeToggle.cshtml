@@ -85,7 +85,18 @@
         .dark .header .search-form button i {
           color: #e4e6eb;
         }
+        
+        .dark .btn-primary {
+          color: #e4e6eb !important;
+        }
 
+        .dark .btn-danger {
+          color: #e4e6eb !important;
+        }
+
+        .dark .btn-primary .bi-plus {
+          color: #e4e6eb !important;
+        }
         /* Header Nav */
         .dark .header-nav .nav-icon {
           color: #e4e6eb;
@@ -271,6 +282,25 @@
           color: #e4e6eb;
         }
 
+        /* Standard way */
+        .dark input::placeholder {
+          color: #d7d7d7;
+        }
+
+        /* For better browser compatibility, include vendor prefixes */
+        .dark input::-webkit-input-placeholder { /* Chrome, Safari, Edge */
+          color: #d7d7d7;
+        }
+        .dark input:-moz-placeholder { /* Firefox 4-18 */
+          color: #d7d7d7;
+        }
+        .dark input::-moz-placeholder { /* Firefox 19+ */
+          color: #d7d7d7;
+        }
+        .dark input:-ms-input-placeholder { /* IE 10+ */
+          color: #d7d7d7;
+        }
+
         /* Tables */
         .dark .table {
           color: #e4e6eb;
@@ -298,6 +328,10 @@
           border-color: #333;
         }
 
+        .dark td {
+          color: #e4e6eb !important;
+        }
+        
         /* Footer */
         .dark .footer {
           border-top: 1px solid #333;
