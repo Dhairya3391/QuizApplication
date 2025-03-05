@@ -16,6 +16,68 @@
     <link href="~/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
     <link href="~/assets/vendor/simple-datatables/style.css" rel="stylesheet">
     <link href="~/assets/css/style.css" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@@barba/core"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    
+    <style>
+        [data-barba="container"] {
+            opacity: 0;
+        }
+    </style>
+    <script>
+        function runInlineScripts(container) {
+            const scripts = container.querySelectorAll('script');
+            scripts.forEach(script => {
+                // Create a new script element to force execution
+                const newScript = document.createElement('script');
+                if (script.src) {
+                    newScript.src = script.src;
+                } else {
+                    newScript.textContent = script.textContent;
+                }
+                document.head.appendChild(newScript);
+                document.head.removeChild(newScript);
+            });
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            barba.init({
+                transitions: [{
+                    name: 'slide-fade',
+                    // When leaving the current page:
+                    leave(data) {
+                        return gsap.to(data.current.container, {
+                            opacity: 0,
+                            y: -50,
+                            duration: 0.4,
+                            ease: 'power1.inOut'
+                        });
+                    },
+                    enter(data) {
+                        gsap.set(data.next.container, { opacity: 0, y: 50 });
+                        runInlineScripts(data.next.container);
+                        return gsap.to(data.next.container, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.4,
+                            ease: 'power1.inOut'
+                        });
+                    },
+                    once(data) {
+                        return gsap.to(data.next.container, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 0.4,
+                            ease: 'power1.inOut'
+                        });
+                    }
+                }]
+            });
+        });
+    </script>
+    
 </head>
 <body>
     <header id="header" class="header fixed-top d-flex align-items-center">
@@ -71,100 +133,101 @@
             </ul>
         </nav>
     </header>
-    <aside id="sidebar" class="sidebar">
-        <ul class="sidebar-nav" id="sidebar-nav">
-            <li class="nav-item">
-                <a class="nav-link collapsed" asp-action="Index" asp-controller="Home">
-                    <i class="bi bi-grid"></i><span>Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Quiz</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a asp-action="QuizList" asp-controller="Quiz">
-                            <i class="bi bi-circle"></i><span>Quiz List</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-action="QuizForm" asp-controller="Quiz">
-                            <i class="bi bi-circle"></i><span>Add Quiz</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-journal-text"></i><span>Question</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a asp-action="QuestionList" asp-controller="Question">
-                            <i class="bi bi-circle"></i><span>Question List</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-action="QuestionForm" asp-controller="Question">
-                            <i class="bi bi-circle"></i><span>Add Question</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-layout-text-window-reverse"></i><span>Question Level</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a asp-action="QuestionLevelList" asp-controller="QuestionLevel">
-                            <i class="bi bi-circle"></i><span>Question Level List</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-action="QuestionLevelForm" asp-controller="QuestionLevel">
-                            <i class="bi bi-circle"></i><span>Add Question Level</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-bar-chart"></i><span>Quiz Wise Question</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a asp-action="QuizWiseQuestionList" asp-controller="QuizWiseQuestion">
-                            <i class="bi bi-circle"></i><span>Quiz Wise List</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a asp-action="QuizWiseQuestionForm" asp-controller="QuizWiseQuestion">
-                            <i class="bi bi-circle"></i><span>Add Quiz Wise Question</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-person"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="icons-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a asp-action="UserList" asp-controller="User">
-                            <i class="bi bi-circle"></i><span>User List</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </aside>
-    <div>
-        <main id="main" class="main">
-            @RenderBody()
-        </main>
+<aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+        <li class="nav-item">
+            <a class="nav-link collapsed" asp-action="Index" asp-controller="Home">
+                <i class="bi bi-grid"></i><span>Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>Quiz</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a asp-action="QuizList" asp-controller="Quiz">
+                        <i class="bi bi-circle"></i><span>Quiz List</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-action="QuizForm" asp-controller="Quiz">
+                        <i class="bi bi-circle"></i><span>Add Quiz</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Question</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a asp-action="QuestionList" asp-controller="Question">
+                        <i class="bi bi-circle"></i><span>Question List</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-action="QuestionForm" asp-controller="Question">
+                        <i class="bi bi-circle"></i><span>Add Question</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Question Level</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a asp-action="QuestionLevelList" asp-controller="QuestionLevel">
+                        <i class="bi bi-circle"></i><span>Question Level List</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-action="QuestionLevelForm" asp-controller="QuestionLevel">
+                        <i class="bi bi-circle"></i><span>Add Question Level</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-bar-chart"></i><span>Quiz Wise Question</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a asp-action="QuizWiseQuestionList" asp-controller="QuizWiseQuestion">
+                        <i class="bi bi-circle"></i><span>Quiz Wise List</span>
+                    </a>
+                </li>
+                <li>
+                    <a asp-action="QuizWiseQuestionForm" asp-controller="QuizWiseQuestion">
+                        <i class="bi bi-circle"></i><span>Add Quiz Wise Question</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-person"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="icons-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a asp-action="UserList" asp-controller="User">
+                        <i class="bi bi-circle"></i><span>User List</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</aside>
+
+<div data-barba="wrapper">
+    <div data-barba="container" id="main">
+        <main class="main">@RenderBody()</main>
     </div>
+</div>
     <footer id="footer" class="footer">
         <div class="copyright">
             © Copyright <strong><span>Quiz Management</span></strong>. All Rights Reserved
