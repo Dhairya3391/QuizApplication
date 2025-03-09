@@ -29,7 +29,6 @@
         function runInlineScripts(container) {
             const scripts = container.querySelectorAll('script');
             scripts.forEach(script => {
-                // Create a new script element to force execution
                 const newScript = document.createElement('script');
                 if (script.src) {
                     newScript.src = script.src;
@@ -45,33 +44,32 @@
         document.addEventListener('DOMContentLoaded', function () {
             barba.init({
                 transitions: [{
-                    name: 'slide-fade',
-                    // When leaving the current page:
-                    leave(data) {
-                        return gsap.to(data.current.container, {
-                            opacity: 0,
-                            y: -50,
-                            duration: 0.4,
-                            ease: 'power1.inOut'
+                    name: 'smooth-slide',
+                    async leave(data) {
+                        await gsap.to(data.current.container, {
+                            x: '-100%',         // Slide left
+                            opacity: 0,         // Fade out
+                            duration: 0.2,      // 0.5 seconds
+                            ease: 'power2.out'  // Smooth easing: fast start, slow finish
                         });
+                    },
+                    beforeEnter(data) {
+                        // Set the new page’s starting position and opacity
+                        gsap.set(data.next.container, { x: '100%', opacity: 0 });
                     },
                     enter(data) {
-                        gsap.set(data.next.container, { opacity: 0, y: 50 });
-                        runInlineScripts(data.next.container);
-                        return gsap.to(data.next.container, {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.4,
-                            ease: 'power1.inOut'
+                        // Slide in and fade the new page
+                        gsap.to(data.next.container, {
+                            x: 0,               // Slide to center
+                            opacity: 1,         // Fade in
+                            duration: 0.2,      // 0.5 seconds
+                            ease: 'power2.out'  // Smooth easing
                         });
+                        runInlineScripts(data.next.container); // Handle any inline scripts
                     },
                     once(data) {
-                        return gsap.to(data.next.container, {
-                            opacity: 1,
-                            y: 0,
-                            duration: 0.4,
-                            ease: 'power1.inOut'
-                        });
+                        // Initial page load: no animation
+                        gsap.set(data.next.container, { x: 0, opacity: 1 });
                     }
                 }]
             });
