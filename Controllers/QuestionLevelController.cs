@@ -2,17 +2,17 @@
 using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using QuizApplication.DbConfigruation;
+using QuizApplication.DbConfiguration;
 using QuizApplication.Models;
-using QuizApplication.QuestionLevelCRUD;
 
 namespace QuizApplication.Controllers
 {
     public class QuestionLevelController : Controller
     {
-        private readonly DbConfiguration _dbConfiguration;
-        private readonly QuestionLevelCRUD.QuestionLevelCRUD questionLevelCRUD;
+        private readonly DbConfigruation.DbConfiguration _dbConfiguration;
+        private readonly QuestionLevelCRUD questionLevelCRUD;
 
-        public QuestionLevelController(DbConfiguration dbConfiguration, QuestionLevelCRUD.QuestionLevelCRUD questionLevelCRUD)
+        public QuestionLevelController(DbConfigruation.DbConfiguration dbConfiguration, QuestionLevelCRUD questionLevelCRUD)
         {
             this._dbConfiguration = dbConfiguration;
             this.questionLevelCRUD = questionLevelCRUD;

@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
+using QuizApplication.DbConfiguration;
 using QuizApplication.Models;
-using QuizApplication.UserCrud;
 
 namespace QuizApplication.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly UserCrud.UserCrud _userCrud;
+        private readonly UserCrud _userCrud;
 
-        public AuthController(UserCrud.UserCrud userCrud)
+        public AuthController(UserCrud userCrud)
         {
             _userCrud = userCrud;
         }

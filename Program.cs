@@ -1,10 +1,6 @@
 using QuizApplication.DbConfigruation;
-using QuizApplication.QuestionCRUD;
-using QuizApplication.QuestionLevelCRUD;
-using QuizApplication.QuizCRUD;
-using QuizApplication.QuizWiseQuestionCRUDCRUD;
+using QuizApplication.DbConfiguration;
 using QuizApplication.Services;
-using QuizApplication.UserCrud;
 
 var builder = WebApplication.CreateBuilder(args);
 

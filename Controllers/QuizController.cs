@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuizApplication.Models;
 using QuizApplication.DbConfigruation;
-using QuizApplication.QuizCRUD;
 using System.Data;
+using QuizApplication.DbConfiguration;
 
 namespace QuizApplication.Controllers
 {
     public class QuizController : Controller
     {
-        private readonly DbConfiguration _dbConfiguration;
-        private readonly QuizCRUD.QuizCRUD _quizCRUD;
+        private readonly DbConfigruation.DbConfiguration _dbConfiguration;
+        private readonly QuizCRUD _quizCRUD;
 
-        public QuizController(DbConfiguration dbConfiguration, QuizCRUD.QuizCRUD quizCRUD)
+        public QuizController(DbConfigruation.DbConfiguration dbConfiguration, QuizCRUD quizCRUD)
         {
             _dbConfiguration = dbConfiguration;
             _quizCRUD = quizCRUD;

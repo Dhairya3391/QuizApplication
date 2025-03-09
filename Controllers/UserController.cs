@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuizApplication.DbConfigruation;
+using QuizApplication.DbConfiguration;
 
 namespace QuizApplication.Controllers
 {
     public class UserController : Controller
     {
-        private readonly DbConfiguration _dbConfiguration;
-        private readonly UserCrud.UserCrud _userCrud;
+        private readonly DbConfigruation.DbConfiguration _dbConfiguration;
+        private readonly UserCrud _userCrud;
 
-        public UserController(DbConfiguration dbConfiguration, UserCrud.UserCrud userCrud)
+        public UserController(DbConfigruation.DbConfiguration dbConfiguration, UserCrud userCrud)
         {
             _dbConfiguration = dbConfiguration;
             _userCrud = userCrud;
