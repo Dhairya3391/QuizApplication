@@ -2,92 +2,91 @@
 using System.Data.SqlClient;
 using QuizApplication.Models;
 
-namespace QuizApplication.DbConfiguration
+namespace QuizApplication.DbConfiguration;
+
+public class QuestionLevelCRUD
 {
-    public class QuestionLevelCRUD
+    private readonly IConfiguration configuration;
+
+    public QuestionLevelCRUD(IConfiguration _configuration)
     {
-        private IConfiguration configuration;
-        
-        public QuestionLevelCRUD(IConfiguration _configuration)
+        configuration = _configuration;
+    }
+
+    public bool AddQuestionLevel(QuestionLevelsModel model)
+    {
+        var connectionString = configuration.GetConnectionString("ConnectionString");
+
+        using (var connection = new SqlConnection(connectionString))
         {
-            configuration = _configuration;
+            connection.Open();
+            var command = new SqlCommand("PR_QuestionLevel_Insert", connection);
+            command.CommandType = CommandType.StoredProcedure;
+
+            command.Parameters.AddWithValue("@QuestionLevel", model.QuestionLevel);
+            command.Parameters.AddWithValue("@UserID", model.UserID);
+            command.Parameters.AddWithValue("@Created", DateTime.Now);
+            command.Parameters.AddWithValue("@Modified", DateTime.Now);
+
+            var result = command.ExecuteNonQuery();
+            return result > 0;
         }
-        
-        public bool AddQuestionLevel(QuestionLevelsModel model)
+    }
+
+    public DataTable EditQuestionLevel(int questionLevelId)
+    {
+        var connectionString = configuration.GetConnectionString("ConnectionString");
+
+        using (var connection = new SqlConnection(connectionString))
         {
-            string connectionString = configuration.GetConnectionString("ConnectionString");
+            connection.Open();
+            var command = new SqlCommand("PR_QuestionLevel_SelectByPK", connection);
+            command.CommandType = CommandType.StoredProcedure;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand("PR_QuestionLevel_Insert", connection);
-                command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@QuestionLevelID", questionLevelId);
 
-                command.Parameters.AddWithValue("@QuestionLevel", model.QuestionLevel);
-                command.Parameters.AddWithValue("@UserID", model.UserID);
-                command.Parameters.AddWithValue("@Created", DateTime.Now);
-                command.Parameters.AddWithValue("@Modified", DateTime.Now);
-
-                int result = command.ExecuteNonQuery();
-                return result > 0;
-            }
+            var reader = command.ExecuteReader();
+            var table = new DataTable();
+            table.Load(reader);
+            return table;
         }
-        
-        public DataTable EditQuestionLevel(int questionLevelId)
+    }
+
+    public bool UpdateQuestionLevel(QuestionLevelsModel model)
+    {
+        var connectionString = configuration.GetConnectionString("ConnectionString");
+
+        using (var connection = new SqlConnection(connectionString))
         {
-            string connectionString = configuration.GetConnectionString("ConnectionString");
+            connection.Open();
+            var command = new SqlCommand("PR_QuestionLevel_UpdateByPk", connection);
+            command.CommandType = CommandType.StoredProcedure;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand("PR_QuestionLevel_SelectByPK", connection);
-                command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@QuestionLevelID", model.QuestionLevelID);
+            command.Parameters.AddWithValue("@QuestionLevel", model.QuestionLevel);
+            command.Parameters.AddWithValue("@UserID", model.UserID);
+            command.Parameters.AddWithValue("@Created", model.Created);
+            command.Parameters.AddWithValue("@Modified", DateTime.Now);
 
-                command.Parameters.AddWithValue("@QuestionLevelID", questionLevelId);
-
-                SqlDataReader reader = command.ExecuteReader();
-                DataTable table = new DataTable();
-                table.Load(reader);
-                return table;
-            }
+            var result = command.ExecuteNonQuery();
+            return result > 0;
         }
-        
-        public bool UpdateQuestionLevel(QuestionLevelsModel model)
+    }
+
+    public bool DeleteQuestionLevel(int questionLevelId)
+    {
+        var connectionString = configuration.GetConnectionString("ConnectionString");
+
+        using (var connection = new SqlConnection(connectionString))
         {
-            string connectionString = configuration.GetConnectionString("ConnectionString");
+            connection.Open();
+            var command = new SqlCommand("PR_QuestionLevel_DeleteByPk", connection);
+            command.CommandType = CommandType.StoredProcedure;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand("PR_QuestionLevel_UpdateByPk", connection);
-                command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@QuestionLevelID", questionLevelId);
 
-                command.Parameters.AddWithValue("@QuestionLevelID", model.QuestionLevelID);
-                command.Parameters.AddWithValue("@QuestionLevel", model.QuestionLevel);
-                command.Parameters.AddWithValue("@UserID", model.UserID);
-                command.Parameters.AddWithValue("@Created", model.Created);
-                command.Parameters.AddWithValue("@Modified", DateTime.Now);
-
-                int result = command.ExecuteNonQuery();
-                return result > 0;
-            }
-        }
-
-        public bool DeleteQuestionLevel(int questionLevelId)
-        {
-            string connectionString = configuration.GetConnectionString("ConnectionString");
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand("PR_QuestionLevel_DeleteByPk", connection);
-                command.CommandType = CommandType.StoredProcedure;
-
-                command.Parameters.AddWithValue("@QuestionLevelID", questionLevelId);
-
-                int result = command.ExecuteNonQuery();
-                return result > 0;
-            }
+            var result = command.ExecuteNonQuery();
+            return result > 0;
         }
     }
 }

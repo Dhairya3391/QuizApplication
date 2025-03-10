@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>@ViewData["Title"] - QuizApp</title>
-    
+
     <style>
         :root {
             --light-bg: #f8fafc;
             --light-text: #333333;
             --light-heading: #1e3a8a;
             --light-sidebar: #ffffff;
-            --light-card: #ffffff; 
+            --light-card: #ffffff;
             --light-border: #e2e8f0;
             --light-link: #3b82f6;
             --light-link-hover: #60a5fa;
@@ -20,22 +20,27 @@
             --light-active-sidebar-text: #1e40af;
             --transition: all 0.3s ease;
         }
+
         .dark {
             --bs-body-bg: #1e293b;
             --bs-body-color: #e2e8f0;
             background-color: #1e293b !important;
             color: #e2e8f0 !important;
         }
+
         .dark body {
             background: #1e293b;
             color: #e2e8f0;
         }
+
         .dark a {
             color: #93c5fd;
         }
+
         .dark a:hover {
             color: #bfdbfe;
         }
+
         .welcome .card {
             background-color: #ffffff !important;
             color: #012970;
@@ -43,89 +48,115 @@
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         .dark .welcome .card {
             background-color: #334155 !important;
             color: #ffffff;
         }
+
         .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
             color: #f1f5f9;
         }
+
         .dark #main {
             background-color: #1e293b;
         }
+
         .dark .pagetitle h1 {
             color: #f1f5f9;
         }
+
         .dark .header {
             background-color: #1e293b;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             border-bottom: 1px solid #334155;
         }
+
         .dark .header .toggle-sidebar-btn {
             color: #e4e6eb;
         }
+
         .dark .logo span {
             color: #e4e6eb;
         }
+
         .dark .header .search-form input {
             color: #e4e6eb;
             background-color: #333;
             border: 1px solid #444;
         }
+
         .dark .header .search-form input:focus, .dark .header .search-form input:hover {
             border: 1px solid #555;
             box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.1);
         }
+
         .dark .header .search-form button i {
             color: #e4e6eb;
         }
+
         .dark .btn-primary {
             color: #ffffff !important;
             background-color: #3b82f6;
         }
+
         .dark .btn-secondary {
             color: #ffffff !important;
         }
+
         .dark .btn-danger {
             color: #e4e6eb !important;
         }
+
         .dataTables-search {
             visibility: hidden !important;
         }
+
         .dark .dataTables-search {
             visibility: hidden !important;
         }
+
         .dark .btn-primary .bi-plus {
             color: #e4e6eb !important;
         }
+
         .dark h6 {
             color: #ffffff !important;
         }
+
         .dark .header-nav .nav-icon {
             color: #e4e6eb;
         }
+
         .dark .header-nav .nav-profile {
             color: #e4e6eb;
         }
+
         .dark .header-nav .notifications .notification-item:hover, .dark .header-nav .messages .message-item:hover {
             background-color: #333;
         }
+
         .dark .header-nav .profile .dropdown-header h6 {
             color: #e4e6eb;
         }
+
         .dark .header-nav .profile .dropdown-item:hover {
             background-color: #333;
         }
+
         .dark .sidebar {
             background-color: #1e293b;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
         }
+
         .dark .sidebar::-webkit-scrollbar {
             background-color: #222;
         }
+
         .dark .sidebar::-webkit-scrollbar-thumb {
             background-color: #444;
         }
+
         .dark .sidebar-nav .nav-link {
             color: #93c5fd;
             background: #334155;
@@ -133,153 +164,196 @@
             margin: 4px 8px;
             transition: all 0.3s ease;
         }
+
         .dark .sidebar-nav .nav-link.collapsed {
             color: #cbd5e1;
             background: transparent;
         }
+
         .dark .sidebar-nav .nav-link.collapsed i {
             color: #aaa;
         }
+
         .dark .sidebar-nav .nav-link:hover {
             color: #ffffff;
             background: #3b82f6;
         }
+
         .dark .sidebar-nav .nav-content a {
             color: #e4e6eb;
         }
+
         .dark .sidebar-nav .nav-content a:hover, .dark .sidebar-nav .nav-content a.active {
             color: #6c8fff;
         }
+
         .dark .sidebar-nav .nav-link.active {
             background-color: #3b82f6;
             color: #ffffff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
+
         .dark .card {
             background-color: #334155;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             border-radius: 12px;
             border: none;
         }
+
         .dark .card-header, .dark .card-footer {
             border-color: #333;
             background-color: #222;
             color: #aaa;
         }
+
         .dark .card-title {
             color: #e4e6eb;
         }
+
         .dark .card-title span {
             color: #aaa;
         }
+
         .dark .dropdown-menu {
             background-color: #222;
             box-shadow: 0 5px 30px 0 rgba(0, 0, 0, 0.4);
         }
+
         .dark .dropdown-menu .dropdown-header, .dark .dropdown-menu .dropdown-footer {
             color: #e4e6eb;
         }
+
         .dark .dropdown-menu .dropdown-footer a {
             color: #aaa;
         }
+
         .dark .dropdown-menu .dropdown-divider {
             border-color: #333;
         }
+
         .dark .dropdown-menu .dropdown-item {
             color: #e4e6eb;
         }
+
         .dark .dropdown-menu .dropdown-item:hover {
             background-color: #333;
         }
+
         .dark .dropdown-menu-arrow::before {
             background: #222;
             border-top: 1px solid #333;
             border-left: 1px solid #333;
         }
+
         .dark .breadcrumb {
             color: #aaa;
         }
+
         .dark .breadcrumb a {
             color: #aaa;
         }
+
         .dark .breadcrumb a:hover {
             color: #e4e6eb;
         }
+
         .dark .breadcrumb .breadcrumb-item::before {
             color: #aaa;
         }
+
         .dark .breadcrumb .active {
             color: #e4e6eb;
         }
+
         .dark .nav-tabs-bordered {
             border-bottom: 2px solid #333;
         }
+
         .dark .nav-tabs-bordered .nav-link {
             color: #aaa;
         }
+
         .dark .nav-tabs-bordered .nav-link:hover, .dark .nav-tabs-bordered .nav-link:focus {
             color: #6c8fff;
         }
+
         .dark .nav-tabs-bordered .nav-link.active {
             background-color: #222;
             color: #6c8fff;
             border-bottom: 2px solid #6c8fff;
         }
+
         .dark input, .dark select, .dark textarea, .dark .form-control, .dark .form-select {
             background-color: #333;
             border-color: #444;
             color: #e4e6eb;
         }
+
         .dark input:focus, .dark select:focus, .dark textarea:focus, .dark .form-control:focus, .dark .form-select:focus {
             background-color: #333;
             border-color: #6c8fff;
             color: #e4e6eb;
         }
+
         .dark input::placeholder {
             color: #d7d7d7;
         }
+
         .dark input::-webkit-input-placeholder {
             color: #d7d7d7;
         }
+
         .dark input:-moz-placeholder {
             color: #d7d7d7;
         }
+
         .dark input::-moz-placeholder {
             color: #d7d7d7;
         }
+
         .dark input:-ms-input-placeholder {
             color: #d7d7d7;
         }
+
         .dark .table {
             color: #e2e8f0;
             border-color: #333;
             background-color: #334155;
             border-radius: 8px;
         }
+
         .dark .table thead {
             background-color: #475569;
         }
+
         .dark .table thead th {
             color: #e4e6eb;
         }
+
         .dark .table tbody tr:hover {
             background-color: #2a2a2a;
         }
+
         .dark .table-bordered {
             border-color: #333;
         }
+
         .dark .table-bordered th, .dark .table-bordered td {
             border-color: #333;
         }
+
         .dark td {
             color: #e4e6eb !important;
         }
+
         .dark .footer {
             border-top: 1px solid #333;
         }
+
         .dark .footer .copyright, .dark .footer .credits {
             color: #aaa;
         }
+
         .theme-toggle-btn {
             background: transparent;
             border: none;
@@ -324,9 +398,11 @@
         body {
             transition: all 0.3s ease;
         }
+
         a {
             transition: all 0.3s ease;
         }
+
         .btn-primary {
             background-color: #3b82f6;
             border: none;
@@ -334,10 +410,12 @@
             /*padding: 8px 16px;*/
             transition: all 0.3s ease;
         }
+
         .btn-primary:hover {
             background-color: #2563eb;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .btn-secondary {
             background-color: #64748b;
             border: none;
@@ -345,9 +423,11 @@
             padding: 8px 16px;
             transition: all 0.3s ease;
         }
+
         .btn-secondary:hover {
             background-color: #475569;
         }
+
         .dark .form-control, .dark .form-select {
             background-color: #334155;
             border: 1px solid #475569;
@@ -355,15 +435,16 @@
             border-radius: 8px;
             transition: all 0.3s ease;
         }
+
         .dark .form-control:focus, .dark .form-select:focus {
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
 
     </style>
-   
+
     <script>
-        (function() {
+        (function () {
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const theme = localStorage.getItem('theme');
             if (theme === 'dark' || (!theme && prefersDark)) {
@@ -374,7 +455,7 @@
             }
         })();
     </script>
-    
+
 </head>
 <body>
 <li class="nav-item">
@@ -384,30 +465,30 @@
 </li>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const themeToggleBtn = document.getElementById('theme-toggle-btn');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
         let savedTheme = localStorage.getItem('theme');
 
         const applyTheme = (isDark) => {
-    document.documentElement.classList.toggle('dark', isDark);
-    document.documentElement.style.backgroundColor = isDark ? '#1a1a1a' : '#fff';
-    themeToggleBtn.innerHTML = isDark ? "<i class=\"bi bi-moon\"></i>" : "<i class=\"bi bi-sun\"></i>️";
-    };
+            document.documentElement.classList.toggle('dark', isDark);
+            document.documentElement.style.backgroundColor = isDark ? '#1a1a1a' : '#fff';
+            themeToggleBtn.innerHTML = isDark ? "<i class=\"bi bi-moon\"></i>" : "<i class=\"bi bi-sun\"></i>️";
+        };
 
-    applyTheme(savedTheme ? savedTheme === 'dark' : prefersDark.matches);
+        applyTheme(savedTheme ? savedTheme === 'dark' : prefersDark.matches);
 
-    themeToggleBtn.addEventListener('click', function() {
-        const isDark = !document.documentElement.classList.contains('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    applyTheme(isDark);
-    });
+        themeToggleBtn.addEventListener('click', function () {
+            const isDark = !document.documentElement.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            applyTheme(isDark);
+        });
 
-    prefersDark.addEventListener('change', (e) => {
-        if (!localStorage.getItem('theme')) {
-    applyTheme(e.matches);
-    }
-    });
+        prefersDark.addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                applyTheme(e.matches);
+            }
+        });
     });
 
 </script>

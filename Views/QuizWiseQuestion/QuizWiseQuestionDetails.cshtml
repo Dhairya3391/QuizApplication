@@ -5,7 +5,8 @@
     <h1>Quiz Wise Question Details</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="QuizWiseQuestionList" asp-controller="QuizWiseQuestion">Quiz Wise Questions</a></li>
+            <li class="breadcrumb-item"><a asp-action="QuizWiseQuestionList" asp-controller="QuizWiseQuestion">Quiz Wise
+                    Questions</a></li>
             <li class="breadcrumb-item active">Quiz Wise Questions Details</li>
         </ol>
     </nav>
@@ -27,7 +28,8 @@
                 <div class="d-flex p-3 justify-content-between align-items-center">
                     <h2 class="card-title">Questions (@ViewBag.QuizName)</h2>
 
-                    <a asp-action="AddQuizWiseQuestions" asp-controller="QuizWiseQuestion" class="btn btn-primary" asp-route-quizName="@ViewBag.QuizName" asp-route-totalQuestions="@ViewBag.TotalQuestions">
+                    <a asp-action="AddQuizWiseQuestions" asp-controller="QuizWiseQuestion" class="btn btn-primary"
+                       asp-route-quizName="@ViewBag.QuizName" asp-route-totalQuestions="@ViewBag.TotalQuestions">
                         <i class="bi bi-plus"></i> Add Questions
                     </a>
 
@@ -35,35 +37,37 @@
                 <table class="table datatable">
 
                     <thead>
-                        <tr>
-                            <th>Question</th>
-                            <th>Option A</th>
-                            <th>Option B</th>
-                            <th>Option C</th>
-                            <th>Option D</th>
-                            <th>Correct Option</th>
-                            <th>Marks</th>
-                            <th>Action</th>
-                        </tr>
+                    <tr>
+                        <th>Question</th>
+                        <th>Option A</th>
+                        <th>Option B</th>
+                        <th>Option C</th>
+                        <th>Option D</th>
+                        <th>Correct Option</th>
+                        <th>Marks</th>
+                        <th>Action</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach (DataRow datarow in Model.Rows)
-                        {
-                            <tr>
-                                <td>@datarow["QuestionText"]</td>
-                                <td>@datarow["OptionA"]</td>
-                                <td>@datarow["OptionB"]</td>
-                                <td>@datarow["OptionC"]</td>
-                                <td>@datarow["OptionD"]</td>
-                                <td>@datarow["CorrectOption"]</td>
-                                <td>@datarow["QuestionMarks"]</td>
-                                <td>
-                                    <a asp-action="DeleteQuizWiseQuestion" asp-controller="QuizWiseQuestion" asp-route-quizWiseQuestionID="@datarow["QuizWiseQuestionsID"]" class="btn btn-danger btn-sm" title="Delete">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        }
+                    @foreach (DataRow datarow in Model.Rows)
+                    {
+                        <tr>
+                            <td>@datarow["QuestionText"]</td>
+                            <td>@datarow["OptionA"]</td>
+                            <td>@datarow["OptionB"]</td>
+                            <td>@datarow["OptionC"]</td>
+                            <td>@datarow["OptionD"]</td>
+                            <td>@datarow["CorrectOption"]</td>
+                            <td>@datarow["QuestionMarks"]</td>
+                            <td>
+                                <a asp-action="DeleteQuizWiseQuestion" asp-controller="QuizWiseQuestion"
+                                   asp-route-quizWiseQuestionID="@datarow["QuizWiseQuestionsID"]"
+                                   class="btn btn-danger btn-sm" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
 

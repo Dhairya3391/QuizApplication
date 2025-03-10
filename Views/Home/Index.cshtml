@@ -1,4 +1,4 @@
-﻿@model QuizApplication.Models.DashboardViewModel
+﻿@model DashboardViewModel
 
 @* Dashboard Title and Breadcrumb *@
 <div class="pagetitle">
@@ -16,7 +16,8 @@
         <div class="col-lg-12">
             <div class="card p-4">
                 <h3 class="mb-3">Hello, @(Context.Session.GetString("Username") ?? "Guest")! 🎉</h3>
-                <p>Welcome back to your quiz management system. Keep track of quizzes, questions, and users effortlessly!</p>
+                <p>Welcome back to your quiz management system. Keep track of quizzes, questions, and users
+                    effortlessly!</p>
             </div>
         </div>
     </div>

@@ -1,14 +1,15 @@
-﻿@model DataTable
-@using System.Data
+﻿@using System.Data
+@model System.Data.DataTable
 @{
-    List<int> addedQuestions = ViewBag.AddedQuestions as List<int> ?? new List<int>();
+    var addedQuestions = ViewBag.AddedQuestions as List<int> ?? new List<int>();
 }
 
 <div class="pagetitle">
     <h1>Quiz Wise Question Add</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="QuizWiseQuestionList" asp-controller="QuizWiseQuestion">Quiz Wise Questions</a></li>
+            <li class="breadcrumb-item"><a asp-action="QuizWiseQuestionList" asp-controller="QuizWiseQuestion">Quiz Wise
+                    Questions</a></li>
             <li class="breadcrumb-item active">Add Quiz Wise Questions</li>
         </ol>
     </nav>
@@ -27,42 +28,42 @@
         <div class="card">
             <div class="card-body">
                 <form id="quizForm" method="post" asp-action="SaveQuizQuestions" asp-controller="QuizWiseQuestion">
-                    <input type="hidden" name="quizId" value="@ViewBag.QuizId" />
+                    <input type="hidden" name="quizId" value="@ViewBag.QuizId"/>
 
                     <table class="table">
                         <thead>
-                            <tr>
-                                <th><input type="checkbox" id="selectAll" /></th>
-                                <th>Question</th>
-                                <th>Option A</th>
-                                <th>Option B</th>
-                                <th>Option C</th>
-                                <th>Option D</th>
-                                <th>Correct Option</th>
-                                <th>Marks</th>
-                            </tr>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"/></th>
+                            <th>Question</th>
+                            <th>Option A</th>
+                            <th>Option B</th>
+                            <th>Option C</th>
+                            <th>Option D</th>
+                            <th>Correct Option</th>
+                            <th>Marks</th>
+                        </tr>
                         </thead>
 
                         <tbody>
-                            @foreach (DataRow datarow in Model.Rows)
-                            {
-                                int questionId = Convert.ToInt32(datarow["QuestionId"]);
-                                bool isChecked = addedQuestions.Contains(questionId);
+                        @foreach (DataRow datarow in Model.Rows)
+                        {
+                            var questionId = Convert.ToInt32(datarow["QuestionId"]);
+                            var isChecked = addedQuestions.Contains(questionId);
 
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" class="question-checkbox" name="selectedQuestions"
-                                               value="@questionId" @(isChecked ? "checked" : "") />
-                                    </td>
-                                    <td>@datarow["QuestionText"]</td>
-                                    <td>@datarow["OptionA"]</td>
-                                    <td>@datarow["OptionB"]</td>
-                                    <td>@datarow["OptionC"]</td>
-                                    <td>@datarow["OptionD"]</td>
-                                    <td>@datarow["CorrectOption"]</td>
-                                    <td>@datarow["QuestionMarks"]</td>
-                                </tr>
-                            }
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="question-checkbox" name="selectedQuestions"
+                                           value="@questionId" @(isChecked ? "checked" : "")/>
+                                </td>
+                                <td>@datarow["QuestionText"]</td>
+                                <td>@datarow["OptionA"]</td>
+                                <td>@datarow["OptionB"]</td>
+                                <td>@datarow["OptionC"]</td>
+                                <td>@datarow["OptionD"]</td>
+                                <td>@datarow["CorrectOption"]</td>
+                                <td>@datarow["QuestionMarks"]</td>
+                            </tr>
+                        }
                         </tbody>
                     </table>
 

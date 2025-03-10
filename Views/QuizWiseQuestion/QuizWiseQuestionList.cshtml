@@ -4,7 +4,8 @@
     <h1>Quiz Wise Question List</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="QuizWiseQuestionList" asp-controller="QuizWiseQuestion">QuizWiseQuestion</a></li>
+            <li class="breadcrumb-item"><a asp-action="QuizWiseQuestionList" asp-controller="QuizWiseQuestion">QuizWiseQuestion</a>
+            </li>
             <li class="breadcrumb-item active">QuizWiseQuestion List</li>
         </ol>
     </nav>
@@ -38,14 +39,16 @@
                 {
                     <div class="alert alert-success d-flex justify-content-between">
                         @TempData["SuccessMessage"]
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background-size:50%"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                                style="background-size:50%"></button>
                     </div>
                 }
                 @if (TempData["ErrorMessage"] != null)
                 {
                     <div class="alert alert-danger d-flex justify-content-between">
                         @TempData["ErrorMessage"]
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="background-size:50%"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                                style="background-size:50%"></button>
                     </div>
                 }
             </div>
@@ -63,27 +66,31 @@
                 <table class="table datatable">
 
                     <thead>
-                        <tr>
-                            <th>Quiz Name</th>
-                            <th>Entered Questions</th>
-                            <th>User Name</th>
-                            <th>Action</th>
-                        </tr>
+                    <tr>
+                        <th>Quiz Name</th>
+                        <th>Entered Questions</th>
+                        <th>User Name</th>
+                        <th>Action</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach (DataRow datarow in Model.Rows)
-                        {
-                            <tr>
-                                <td>@datarow["QuizName"]</td>
-                                <td>@datarow["Entered Questions"]</td>
-                                <td>@datarow["UserName"]</td>
-                                <td>
-                                    <a class="btn btn-info btn-sm text-white" title="Details" asp-action="QuizWiseQuestionDetails" asp-controller="QuizWiseQuestion" asp-route-quizId="@datarow["QuizID"]" asp-route-quizName="@datarow["QuizName"]" asp-route-totalQuestions="@datarow["TotalQuestions"]"><i class="bi bi-info-circle"></i></a>
-                                    <a class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil"></i></a>
-                                    <a class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
-                                </td>
-                            </tr>
-                        }
+                    @foreach (DataRow datarow in Model.Rows)
+                    {
+                        <tr>
+                            <td>@datarow["QuizName"]</td>
+                            <td>@datarow["Entered Questions"]</td>
+                            <td>@datarow["UserName"]</td>
+                            <td>
+                                <a class="btn btn-info btn-sm text-white" title="Details"
+                                   asp-action="QuizWiseQuestionDetails" asp-controller="QuizWiseQuestion"
+                                   asp-route-quizId="@datarow["QuizID"]" asp-route-quizName="@datarow["QuizName"]"
+                                   asp-route-totalQuestions="@datarow["TotalQuestions"]"><i
+                                        class="bi bi-info-circle"></i></a>
+                                <a class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil"></i></a>
+                                <a class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
 

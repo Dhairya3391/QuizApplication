@@ -43,23 +43,18 @@ app.Use(async (context, next) =>
         await next.Invoke();
         return;
     }
-    bool isAuthRoute = path.StartsWith("/auth/");
-    bool isLoggedIn = context.Session.GetInt32("UserId").HasValue;
+
+    var isAuthRoute = path.StartsWith("/auth/");
+    var isLoggedIn = context.Session.GetInt32("UserId").HasValue;
     if (isAuthRoute || isLoggedIn)
-    {
         await next.Invoke();
-    }
     else if (context.Request.Method == "GET")
-    {
         context.Response.Redirect("/Auth/Login"); // Redirect to Login
-    }
     else
-    {
         await next.Invoke();
-    }
 });
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Auth}/{action=Login}/{id?}"
+    "default",
+    "{controller=Auth}/{action=Login}/{id?}"
 );
 app.Run();

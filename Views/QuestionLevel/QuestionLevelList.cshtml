@@ -67,8 +67,6 @@
 @*         </div> *@
 @*     </div> *@
 @* </section> *@
-
-
 @using System.Data
 @model System.Data.DataTable
 
@@ -77,6 +75,7 @@
         white-space: normal;
         word-wrap: break-word;
     }
+
     .action-column {
         white-space: nowrap;
     }
@@ -86,7 +85,8 @@
     <h1>Question Level List</h1>
     <nav>
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="QuestionLevelList" asp-controller="QuestionLevel">QuestionLevel</a></li>
+            <li class="breadcrumb-item"><a asp-action="QuestionLevelList"
+                                           asp-controller="QuestionLevel">QuestionLevel</a></li>
             <li class="breadcrumb-item active">Question Level List</li>
         </ol>
     </nav>
@@ -131,8 +131,12 @@
                                 <td>@datarow["UserName"]</td>
                                 <td class="action-column">
                                     <div class="d-flex gap-2">
-                                        <a asp-action="EditQuestionLevel" asp-controller="QuestionLevel" asp-route-id="@datarow["QuestionLevelID"]" class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil"></i></a>
-                                        <a asp-action="DeleteQuestionLevel" asp-controller="QuestionLevel" asp-route-id="@datarow["QuestionLevelID"]" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
+                                        <a asp-action="EditQuestionLevel" asp-controller="QuestionLevel"
+                                           asp-route-id="@datarow["QuestionLevelID"]" class="btn btn-primary btn-sm"
+                                           title="Edit"><i class="bi bi-pencil"></i></a>
+                                        <a asp-action="DeleteQuestionLevel" asp-controller="QuestionLevel"
+                                           asp-route-id="@datarow["QuestionLevelID"]" class="btn btn-danger btn-sm"
+                                           title="Delete"><i class="bi bi-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>

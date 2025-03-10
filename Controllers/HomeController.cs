@@ -1,26 +1,22 @@
 using Microsoft.AspNetCore.Mvc;
 using QuizApplication.Services;
 
-namespace QuizApplication.Controllers
+namespace QuizApplication.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly DashboardService _dashboardService;
+
+    public HomeController(DashboardService dashboardService)
     {
-        private readonly DashboardService _dashboardService;
+        _dashboardService = dashboardService;
+    }
 
-        public HomeController(DashboardService dashboardService)
-        {
-            _dashboardService = dashboardService;
-        }
+    public IActionResult Index()
+    {
+        if (!HttpContext.Session.GetInt32("UserId").HasValue) return RedirectToAction("Login", "Auth");
 
-        public IActionResult Index()
-        {
-            if (!HttpContext.Session.GetInt32("UserId").HasValue)
-            {
-                return RedirectToAction("Login", "Auth");
-            }
-
-            var model = _dashboardService.GetDashboardData();
-            return View(model);
-        }
+        var model = _dashboardService.GetDashboardData();
+        return View(model);
     }
 }

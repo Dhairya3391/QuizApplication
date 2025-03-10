@@ -1,127 +1,116 @@
-﻿using System.Data;
-using Microsoft.AspNetCore.Mvc;
-using QuizApplication.DbConfigruation;
+﻿using Microsoft.AspNetCore.Mvc;
 using QuizApplication.DbConfiguration;
 using QuizApplication.Models;
 
-namespace QuizApplication.Controllers
+namespace QuizApplication.Controllers;
+
+public class QuizWiseQuestionController : Controller
 {
-    public class QuizWiseQuestionController : Controller
+    private readonly DbConfigruation.DbConfiguration _dbConfiguration;
+    private readonly QuizWiseQuestionCRUD _quizWiseQuestion;
+
+    public QuizWiseQuestionController(DbConfigruation.DbConfiguration dbConfiguration,
+        QuizWiseQuestionCRUD quizWiseQuestion)
     {
-        private readonly DbConfigruation.DbConfiguration _dbConfiguration;
-        private readonly QuizWiseQuestionCRUD _quizWiseQuestion;
-        public QuizWiseQuestionController(DbConfigruation.DbConfiguration dbConfiguration, QuizWiseQuestionCRUD quizWiseQuestion)
-        {
-            this._dbConfiguration = dbConfiguration;
-            this._quizWiseQuestion = quizWiseQuestion;
-        }
+        _dbConfiguration = dbConfiguration;
+        _quizWiseQuestion = quizWiseQuestion;
+    }
 
-        public IActionResult QuizWiseQuestionList()
-        {
-            return View(_dbConfiguration.GetAllData("PR_QuizQuestionsWise_SelectAll"));
-        }
+    public IActionResult QuizWiseQuestionList()
+    {
+        return View(_dbConfiguration.GetAllData("PR_QuizQuestionsWise_SelectAll"));
+    }
 
-        public IActionResult QuizWiseQuestionForm()
-        {
-            return View();
-        }
+    public IActionResult QuizWiseQuestionForm()
+    {
+        return View();
+    }
 
-        [HttpPost]
-        public ActionResult AddQuizWiseQuestionEntry(QuizWiseQuestionModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                return RedirectToAction("QuizWiseQuestionList");
-            }
+    [HttpPost]
+    public ActionResult AddQuizWiseQuestionEntry(QuizWiseQuestionModel model)
+    {
+        if (ModelState.IsValid) return RedirectToAction("QuizWiseQuestionList");
 
-            return View("QuizWiseQuestionForm", model);
-        }
+        return View("QuizWiseQuestionForm", model);
+    }
 
-        public IActionResult QuizWiseQuestionDetails(int quizId, string quizName,int totalQuestions)
-        {
-            return RedirectToAction("QuizWiseQuestionDetailsAction", "QuizWiseQuestion",
-        new { quizId = quizId, quizName = quizName, totalQuestions = totalQuestions });
-        }
+    public IActionResult QuizWiseQuestionDetails(int quizId, string quizName, int totalQuestions)
+    {
+        return RedirectToAction("QuizWiseQuestionDetailsAction", "QuizWiseQuestion",
+            new { quizId, quizName, totalQuestions });
+    }
 
-        public IActionResult QuizWiseQuestionDetailsAction(int quizId, string quizName, int totalQuestions)
-        {
-            ViewBag.QuizName = quizName;
-            ViewBag.TotalQuestions = totalQuestions;
-            return View("QuizWiseQuestionDetails", _quizWiseQuestion.GetQuizWiseQuestionDetails(quizId));
-        }
+    public IActionResult QuizWiseQuestionDetailsAction(int quizId, string quizName, int totalQuestions)
+    {
+        ViewBag.QuizName = quizName;
+        ViewBag.TotalQuestions = totalQuestions;
+        return View("QuizWiseQuestionDetails", _quizWiseQuestion.GetQuizWiseQuestionDetails(quizId));
+    }
 
-        public IActionResult AddQuizWiseQuestions(string quizName, int totalQuestions) {
-            //ViewBag.QuizName = quizName;
-            //ViewBag.TotalQuestions = totalQuestions;
-            //return View(_dbConfiguration.GetAllData("PR_Question_SelectAll"));
-            //return View();
-            int quizId = _quizWiseQuestion.GetQuizIdByName(quizName);
-            ViewBag.QuizId = quizId;
-            ViewBag.QuizName = quizName;
-            ViewBag.TotalQuestions = totalQuestions;
+    public IActionResult AddQuizWiseQuestions(string quizName, int totalQuestions)
+    {
+        //ViewBag.QuizName = quizName;
+        //ViewBag.TotalQuestions = totalQuestions;
+        //return View(_dbConfiguration.GetAllData("PR_Question_SelectAll"));
+        //return View();
+        var quizId = _quizWiseQuestion.GetQuizIdByName(quizName);
+        ViewBag.QuizId = quizId;
+        ViewBag.QuizName = quizName;
+        ViewBag.TotalQuestions = totalQuestions;
 
-            // Fetch already added questions
-            List<int> addedQuestions = _quizWiseQuestion.GetAddedQuestionIds(quizId);
-            ViewBag.AddedQuestions = addedQuestions;
+        // Fetch already added questions
+        var addedQuestions = _quizWiseQuestion.GetAddedQuestionIds(quizId);
+        ViewBag.AddedQuestions = addedQuestions;
 
-            // Fetch all available questions
-            DataTable allQuestions = _dbConfiguration.GetAllData("PR_Question_SelectAll");
+        // Fetch all available questions
+        var allQuestions = _dbConfiguration.GetAllData("PR_Question_SelectAll");
 
-            return View(allQuestions);
-        }
+        return View(allQuestions);
+    }
 
-        //[HttpPost]
-        //public IActionResult SaveQuizQuestions(int quizId, List<int> selectedQuestions)
-        //{
-        //    if (selectedQuestions == null || selectedQuestions.Count == 0)
-        //    {
-        //        TempData["ErrorMessage"] = "Please select at least one question.";
-        //        return RedirectToAction("QuizWiseQuestionDetails", new { quizId = quizId });
-        //    }
+    //[HttpPost]
+    //public IActionResult SaveQuizQuestions(int quizId, List<int> selectedQuestions)
+    //{
+    //    if (selectedQuestions == null || selectedQuestions.Count == 0)
+    //    {
+    //        TempData["ErrorMessage"] = "Please select at least one question.";
+    //        return RedirectToAction("QuizWiseQuestionDetails", new { quizId = quizId });
+    //    }
 
-        //    try
-        //    {
-        //        _quizWiseQuestion.SaveSelectedQuestions(quizId, selectedQuestions);
-        //        TempData["SuccessMessage"] = "Questions added successfully!";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        TempData["ErrorMessage"] = "Error adding questions: " + ex.Message;
-        //    }
+    //    try
+    //    {
+    //        _quizWiseQuestion.SaveSelectedQuestions(quizId, selectedQuestions);
+    //        TempData["SuccessMessage"] = "Questions added successfully!";
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        TempData["ErrorMessage"] = "Error adding questions: " + ex.Message;
+    //    }
 
-        //    return RedirectToAction("QuizWiseQuestionList");
-        //}
+    //    return RedirectToAction("QuizWiseQuestionList");
+    //}
 
 
-        [HttpPost]
-        public IActionResult SaveQuizQuestions(int quizId, List<int> selectedQuestions)
-        {
-            int userId = 1; // Assume logged-in user ID
+    [HttpPost]
+    public IActionResult SaveQuizQuestions(int quizId, List<int> selectedQuestions)
+    {
+        var userId = 1; // Assume logged-in user ID
 
-            foreach (var questionId in selectedQuestions)
-            {
-                _quizWiseQuestion.AddQuizWiseQuestion(quizId, questionId, userId);
-            }
+        foreach (var questionId in selectedQuestions) _quizWiseQuestion.AddQuizWiseQuestion(quizId, questionId, userId);
 
-            return RedirectToAction("QuizWiseQuestionList");
-        }
+        return RedirectToAction("QuizWiseQuestionList");
+    }
 
-        [HttpGet]
-        public ActionResult DeleteQuizWiseQuestion(int quizWiseQuestionID)
-        {
-            bool isDeleted = _quizWiseQuestion.DeleteQuizWiseQuestion(quizWiseQuestionID);
+    [HttpGet]
+    public ActionResult DeleteQuizWiseQuestion(int quizWiseQuestionID)
+    {
+        var isDeleted = _quizWiseQuestion.DeleteQuizWiseQuestion(quizWiseQuestionID);
 
-            if (isDeleted)
-            {
-                TempData["SuccessMessage"] = "Question deleted successfully.";
-            }
-            else
-            {
-                TempData["ErrorMessage"] = "Error while deleting question.";
-            }
+        if (isDeleted)
+            TempData["SuccessMessage"] = "Question deleted successfully.";
+        else
+            TempData["ErrorMessage"] = "Error while deleting question.";
 
-            return RedirectToAction("QuizWiseQuestionList");
-        }
-
+        return RedirectToAction("QuizWiseQuestionList");
     }
 }

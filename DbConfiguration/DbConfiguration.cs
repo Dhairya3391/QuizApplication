@@ -1,69 +1,68 @@
-﻿using System.Data.SqlClient;
-using System.Data;
+﻿using System.Data;
+using System.Data.SqlClient;
 
-namespace QuizApplication.DbConfigruation
+namespace QuizApplication.DbConfigruation;
+
+public class DbConfiguration
 {
-    public class DbConfiguration
+    private readonly IConfiguration configuration;
+    private readonly string connectionString;
+
+    public DbConfiguration(IConfiguration _configuration)
     {
-        private readonly IConfiguration configuration;
-        private readonly string connectionString;
+        configuration = _configuration;
+        connectionString = GetWorkingConnectionString();
+    }
 
-        public DbConfiguration(IConfiguration _configuration)
+    private string GetWorkingConnectionString()
+    {
+        string[] connectionStrings =
         {
-            configuration = _configuration;
-            connectionString = GetWorkingConnectionString();
-        }
+            configuration.GetConnectionString("ConnectionString"),
+            configuration.GetConnectionString("ConnectionString1"),
+            configuration.GetConnectionString("ConnectionString2"),
+            configuration.GetConnectionString("ConnectionString3")
+        };
 
-        private string GetWorkingConnectionString()
+        foreach (var conn in connectionStrings)
         {
-            string[] connectionStrings =
-            {
-                configuration.GetConnectionString("ConnectionString"),
-                configuration.GetConnectionString("ConnectionString1"),
-                configuration.GetConnectionString("ConnectionString2"),
-                configuration.GetConnectionString("ConnectionString3")
-            };
+            if (string.IsNullOrEmpty(conn)) continue; // Skip empty connection strings
 
-            foreach (var conn in connectionStrings)
+            try
             {
-                if (string.IsNullOrEmpty(conn)) continue; // Skip empty connection strings
-
-                try
+                using (var connection = new SqlConnection(conn))
                 {
-                    using (var connection = new SqlConnection(conn))
-                    {
-                        connection.Open();
-                        connection.Close();
-                        Console.WriteLine($"Connected successfully to: {conn}");
-                        return conn; // Return first working connection
-                    }
-                }
-                catch
-                {
-                    Console.WriteLine($"Failed to connect using: {conn}");
+                    connection.Open();
+                    connection.Close();
+                    Console.WriteLine($"Connected successfully to: {conn}");
+                    return conn; // Return first working connection
                 }
             }
-
-            throw new Exception("No valid database connection found!");
+            catch
+            {
+                Console.WriteLine($"Failed to connect using: {conn}");
+            }
         }
 
-        public DataTable GetAllData(string spName)
+        throw new Exception("No valid database connection found!");
+    }
+
+    public DataTable GetAllData(string spName)
+    {
+        using (var connection = new SqlConnection(connectionString))
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
             {
-                connection.Open();
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = spName;
 
-                using (SqlCommand command = connection.CreateCommand())
+                using (var reader = command.ExecuteReader())
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.CommandText = spName;
-
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        DataTable table = new DataTable();
-                        table.Load(reader);
-                        return table;
-                    }
+                    var table = new DataTable();
+                    table.Load(reader);
+                    return table;
                 }
             }
         }
