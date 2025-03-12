@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using QuizApplication.DbConfiguration;
 using QuizApplication.Models;
+using ClosedXML.Excel;
+
 
 namespace QuizApplication.Controllers;
 
@@ -117,6 +119,26 @@ public class QuizController : Controller
             TempData["ErrorMessage"] = "Error while deleting quiz.";
         return RedirectToAction("QuizList");
     }
+    public IActionResult ExportQuizList(string quizName = null, int? totalQuestion = null, DateTime? quizDate = null)
+    {
+        DataTable dt;
+        if (!string.IsNullOrEmpty(quizName) || totalQuestion.HasValue || quizDate.HasValue)
+            dt = _quizCRUD.SearchQuizzes(quizName, totalQuestion, quizDate);
+        else
+            dt = _dbConfiguration.GetAllData("PR_Quiz_SelectAll");
+
+        using var workbook = new XLWorkbook();
+        var worksheet = workbook.Worksheets.Add("QuizList");
+        worksheet.Cell(1, 1).InsertTable(dt);
+
+        using var stream = new MemoryStream();
+        workbook.SaveAs(stream);
+        var content = stream.ToArray();
+        return File(content,
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "QuizList.xlsx");
+    }
+
 
     [HttpPost]
     public JsonResult SearchQuizzes(string quizName, int? totalQuestion, DateTime? quizDate)

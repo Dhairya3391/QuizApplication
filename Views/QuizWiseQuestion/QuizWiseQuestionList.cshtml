@@ -14,55 +14,55 @@
 <section class="section">
     <div class="row">
 
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Search Quiz</h5>
-                <!-- No Labels Form -->
-                <form class="row g-3">
-                    <div class="col-md-4">
-                        <label for="quizSearch" class="form-label">Select Quiz</label>
-                        <select id="quizSearch" class="form-select border border-black">
-                            <option selected>Select quiz</option>
-                            <option>maths</option>
-                            <option>sci</option>
-                        </select>
-                    </div>
-                    <div class="text-start">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                        <button type="reset" class="btn btn-secondary">Reset</button>
-                    </div>
-                </form><!-- End No Labels Form -->
-            </div>
-
-            <div class="p-2">
-                @if (TempData["SuccessMessage"] != null)
-                {
-                    <div class="alert alert-success d-flex justify-content-between">
-                        @TempData["SuccessMessage"]
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                                style="background-size:50%"></button>
-                    </div>
-                }
-                @if (TempData["ErrorMessage"] != null)
-                {
-                    <div class="alert alert-danger d-flex justify-content-between">
-                        @TempData["ErrorMessage"]
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
-                                style="background-size:50%"></button>
-                    </div>
-                }
-            </div>
-
+        @* <div class="card"> *@
+        @*     <div class="card-body"> *@
+        @*         <h5 class="card-title">Search Quiz</h5> *@
+        @*         <!-- No Labels Form --> *@
+        @*         <form class="row g-3"> *@
+        @*             <div class="col-md-4"> *@
+        @*                 <label for="quizSearch" class="form-label">Select Quiz</label> *@
+        @*                 <select id="quizSearch" class="form-select border border-black"> *@
+        @*                     <option selected>Select quiz</option> *@
+        @*                     <option>maths</option> *@
+        @*                     <option>sci</option> *@
+        @*                 </select> *@
+        @*             </div> *@
+        @*             <div class="text-start"> *@
+        @*                 <button type="submit" class="btn btn-primary">Search</button> *@
+        @*                 <button type="reset" class="btn btn-secondary">Reset</button> *@
+        @*             </div> *@
+        @*         </form><!-- End No Labels Form --> *@
+        @*     </div> *@
+        @* *@
+        @*      *@
+        @* </div> *@
+        <div class="p-2">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success d-flex justify-content-between">
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                            style="background-size:50%"></button>
+                </div>
+            }
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger d-flex justify-content-between">
+                    @TempData["ErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                            style="background-size:50%"></button>
+                </div>
+            }
         </div>
 
         <div class="card">
             <div class="card-body">
-                <div class="d-flex p-3 justify-content-between align-items-center">
-
-                    <a asp-action="QuizWiseQuestionForm" asp-controller="QuizWiseQuestion" class="btn btn-primary">
-                        <i class="bi bi-plus"></i> Add Quiz Wise Question
-                    </a>
-                </div>
+                @* <div class="d-flex p-3 justify-content-between align-items-center"> *@
+                @* *@
+                @*     <a asp-action="QuizWiseQuestionForm" asp-controller="QuizWiseQuestion" class="btn btn-primary"> *@
+                @*         <i class="bi bi-plus"></i> Add Quiz Wise Question *@
+                @*     </a> *@
+                @* </div> *@
                 <table class="table datatable">
 
                     <thead>
@@ -86,7 +86,7 @@
                                    asp-route-quizId="@datarow["QuizID"]" asp-route-quizName="@datarow["QuizName"]"
                                    asp-route-totalQuestions="@datarow["TotalQuestions"]"><i
                                         class="bi bi-info-circle"></i></a>
-                                <a class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil"></i></a>
+                                @* <a class="btn btn-primary btn-sm" title="Edit"><i class="bi bi-pencil"></i></a> *@
                                 <a class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash"></i></a>
                             </td>
                         </tr>

@@ -33,7 +33,7 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th><input type="checkbox" id="selectAll"/></th>
+                            <th>Select</th>
                             <th>Question</th>
                             <th>Option A</th>
                             <th>Option B</th>
@@ -53,7 +53,7 @@
                             <tr>
                                 <td>
                                     <input type="checkbox" class="question-checkbox" name="selectedQuestions"
-                                           value="@questionId" @(isChecked ? "checked" : "")/>
+                                           value="@questionId" @(isChecked ? "checked" : "") @(isChecked ? "disabled" : "")/>
                                 </td>
                                 <td>@datarow["QuestionText"]</td>
                                 <td>@datarow["OptionA"]</td>
