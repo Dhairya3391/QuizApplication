@@ -11,11 +11,13 @@ public class QuizController : Controller
 {
     private readonly DbConfigruation.DbConfiguration _dbConfiguration;
     private readonly QuizCRUD _quizCRUD;
+    private readonly QuizWiseQuestionCRUD _quizWiseQuestionCRUD;
 
-    public QuizController(DbConfigruation.DbConfiguration dbConfiguration, QuizCRUD quizCRUD)
+    public QuizController(DbConfigruation.DbConfiguration dbConfiguration, QuizCRUD quizCRUD, QuizWiseQuestionCRUD quizWiseQuestionCRUD)
     {
         _dbConfiguration = dbConfiguration;
         _quizCRUD = quizCRUD;
+        _quizWiseQuestionCRUD = quizWiseQuestionCRUD;
     }
 
     // GET: Display the form to create a new quiz
@@ -52,11 +54,16 @@ public class QuizController : Controller
     {
         if (ModelState.IsValid)
         {
-            var isInserted = _quizCRUD.AddQuiz(model);
-            if (isInserted)
-            {
-                TempData["SuccessMessage"] = "Quiz added successfully.";
-                return RedirectToAction("QuizList");
+            //var isInserted = _quizCRUD.AddQuiz(model);
+            int quizId = _quizCRUD.AddQuiz(model);
+            if (quizId > 0) { 
+                var isInsertedQWQ = _quizWiseQuestionCRUD.AddQuizWiseQuestionRef(quizId);
+                Console.WriteLine(quizId);
+                if(isInsertedQWQ)
+                {
+                    TempData["SuccessMessage"] = "Quiz added successfully.";
+                    return RedirectToAction("QuizList");
+                }
             }
 
             TempData["ErrorMessage"] = "Error while adding quiz.";

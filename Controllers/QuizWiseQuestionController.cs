@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Data;
+using Microsoft.AspNetCore.Mvc;
 using QuizApplication.DbConfiguration;
 using QuizApplication.Models;
 
@@ -42,59 +43,95 @@ public class QuizWiseQuestionController : Controller
 
     public IActionResult QuizWiseQuestionDetailsAction(int quizId, string quizName, int totalQuestions)
     {
-        ViewBag.QuizName = quizName;
-        ViewBag.TotalQuestions = totalQuestions;
+        TempData["QuizId"] = quizId;
+        TempData["QuizName"]  = quizName;
+        TempData["totalQuestions"] = totalQuestions;
+
+        TempData.Keep("QuizId");
+        TempData.Keep("QuizName");
+        TempData.Keep("totalQuestions");
+
         return View("QuizWiseQuestionDetails", _quizWiseQuestion.GetQuizWiseQuestionDetails(quizId));
+    }
+
+    //public IActionResult AddQuizWiseQuestions(string quizName, int totalQuestions)
+    //{
+    //    //ViewBag.QuizName = quizName;
+    //    //ViewBag.TotalQuestions = totalQuestions;
+    //    //return View(_dbConfiguration.GetAllData("PR_Question_SelectAll"));
+    //    //return View();
+    //    var quizId = _quizWiseQuestion.GetQuizIdByName(quizName);
+    //    ViewBag.QuizId = quizId;
+    //    ViewBag.QuizName = quizName;
+    //    ViewBag.TotalQuestions = totalQuestions;
+
+    //    // Fetch already added questions
+    //    var addedQuestions = _quizWiseQuestion.GetAddedQuestionIds(quizId);
+    //    ViewBag.AddedQuestions = addedQuestions;
+
+    //    // Fetch all available questions
+    //    var allQuestions = _dbConfiguration.GetAllData("PR_Question_SelectAll");
+
+    //    return View(allQuestions);
+    //}
+
+    private object GetDefaultValue(Type type)
+    {
+        if (type == typeof(string)) return "N/A";
+        if (type == typeof(int) || type == typeof(long)) return 0;
+        if (type == typeof(float) || type == typeof(double) || type == typeof(decimal)) return 0.0;
+        if (type == typeof(DateTime)) return DateTime.MinValue;
+        return DBNull.Value; // Return database NULL as last resort
     }
 
     public IActionResult AddQuizWiseQuestions(string quizName, int totalQuestions)
     {
-        //ViewBag.QuizName = quizName;
-        //ViewBag.TotalQuestions = totalQuestions;
-        //return View(_dbConfiguration.GetAllData("PR_Question_SelectAll"));
-        //return View();
-        var quizId = _quizWiseQuestion.GetQuizIdByName(quizName);
-        ViewBag.QuizId = quizId;
-        ViewBag.QuizName = quizName;
-        ViewBag.TotalQuestions = totalQuestions;
+        try
+        {
+            // Get Quiz ID by name
+            var quizId = _quizWiseQuestion.GetQuizIdByName(quizName);
+            if (quizId == 0)
+            {
+                TempData["ErrorMessage"] = "Invalid Quiz Name. No matching quiz found!";
+                return RedirectToAction("QuizList"); // Redirect if quiz doesn't exist
+            }
 
-        // Fetch already added questions
-        var addedQuestions = _quizWiseQuestion.GetAddedQuestionIds(quizId);
-        ViewBag.AddedQuestions = addedQuestions;
+            ViewBag.QuizId = quizId;
+            ViewBag.QuizName = quizName;
+            ViewBag.TotalQuestions = totalQuestions;
 
-        // Fetch all available questions
-        var allQuestions = _dbConfiguration.GetAllData("PR_Question_SelectAll");
+            // Fetch already added questions
+            var addedQuestions = _quizWiseQuestion.GetAddedQuestionIds(quizId);
+            ViewBag.AddedQuestions = addedQuestions;
 
-        return View(allQuestions);
+            // Fetch all available questions
+            var allQuestions = _dbConfiguration.GetAllData("PR_Question_SelectAll");
+
+            // Handle NULL values in DataTable
+            foreach (DataRow row in allQuestions.Rows)
+            {
+                foreach (DataColumn col in allQuestions.Columns)
+                {
+                    if (row.IsNull(col))
+                    {
+                        row[col] = GetDefaultValue(col.DataType);
+                    }
+                }
+            }
+
+            return View(allQuestions);
+        }
+        catch (Exception ex)
+        {
+            TempData["ErrorMessage"] = "An error occurred: " + ex.Message;
+            return RedirectToAction("QuizWiseQuestionList");
+        }
     }
-
-    //[HttpPost]
-    //public IActionResult SaveQuizQuestions(int quizId, List<int> selectedQuestions)
-    //{
-    //    if (selectedQuestions == null || selectedQuestions.Count == 0)
-    //    {
-    //        TempData["ErrorMessage"] = "Please select at least one question.";
-    //        return RedirectToAction("QuizWiseQuestionDetails", new { quizId = quizId });
-    //    }
-
-    //    try
-    //    {
-    //        _quizWiseQuestion.SaveSelectedQuestions(quizId, selectedQuestions);
-    //        TempData["SuccessMessage"] = "Questions added successfully!";
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        TempData["ErrorMessage"] = "Error adding questions: " + ex.Message;
-    //    }
-
-    //    return RedirectToAction("QuizWiseQuestionList");
-    //}
-
 
     [HttpPost]
     public IActionResult SaveQuizQuestions(int quizId, List<int> selectedQuestions)
     {
-        var userId = 1; // Assume logged-in user ID
+        var userId = 1;
 
         foreach (var questionId in selectedQuestions) _quizWiseQuestion.AddQuizWiseQuestion(quizId, questionId, userId);
 
@@ -111,6 +148,17 @@ public class QuizWiseQuestionController : Controller
         else
             TempData["ErrorMessage"] = "Error while deleting question.";
 
-        return RedirectToAction("QuizWiseQuestionList");
+        //int quizId = Convert.ToInt32(TempData["QuizId"]);
+        //string quizName = Convert.ToString(TempData["QuizName"]);
+        //int totalQuestions = Convert.ToInt32(TempData["totalQuestions"]);
+
+        int quizId = Convert.ToInt32(TempData.Peek("QuizId"));
+        string quizName = Convert.ToString(TempData.Peek("QuizName"));
+        int totalQuestions = Convert.ToInt32(TempData.Peek("totalQuestions"));
+
+
+        //return RedirectToAction("QuizWiseQuestionDetailsAction", "QuizWiseQuestion", );
+        return RedirectToAction("QuizWiseQuestionDetailsAction", "QuizWiseQuestion",
+            new { quizId, quizName, totalQuestions });
     }
 }

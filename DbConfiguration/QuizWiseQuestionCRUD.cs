@@ -12,22 +12,20 @@ public class QuizWiseQuestionCRUD
         configuration = _configuration;
     }
 
-    //public bool AddQuiz(QuizWiseQuestionModel model)
-    //{
-    //    string connectionString = configuration.GetConnectionString("ConnectionString");
+    public bool AddQuizWiseQuestionRef(int quizId)
+    {
+        string connectionString = configuration.GetConnectionString("ConnectionString");
 
-    //    SqlConnection connection = new SqlConnection(connectionString);
-    //    connection.Open();
-    //    SqlCommand command = new SqlCommand("PR_Quiz_Insert", connection);
-    //    command.CommandType = CommandType.StoredProcedure;
+        SqlConnection connection = new SqlConnection(connectionString);
+        connection.Open();
+        SqlCommand command = new SqlCommand("PR_QuizQuestionsWise_Insert", connection);
+        command.CommandType = CommandType.StoredProcedure;
 
-    //    command.Parameters.AddWithValue("@QuizName", model.QuizName);
-    //    command.Parameters.AddWithValue("@TotalQuestions", model.TotalQuestions);
-    //    command.Parameters.AddWithValue("@QuizDate", model.QuizDate);
-    //    command.Parameters.AddWithValue("@UserID", 1);
-    //    int result = command.ExecuteNonQuery();
-    //    return result > 0;
-    //}
+        command.Parameters.AddWithValue("@QuizID", quizId);
+        command.Parameters.AddWithValue("@UserID", 1);
+        int result = command.ExecuteNonQuery();
+        return result > 0;
+    }
 
     //public DataTable GetQuizWiseQuestionDetails(QuizWiseQuestionModel model)
     //{
@@ -119,6 +117,28 @@ public class QuizWiseQuestionCRUD
     }
 
 
+    //public List<int> GetAddedQuestionIds(int quizId)
+    //{
+    //    var questionIds = new List<int>();
+    //    var connectionString = configuration.GetConnectionString("ConnectionString");
+
+    //    using (var connection = new SqlConnection(connectionString))
+    //    {
+    //        connection.Open();
+    //        using (var command = new SqlCommand("SELECT QuestionID FROM MST_QuizWiseQuestions WHERE QuizID = @QuizID",
+    //                   connection))
+    //        {
+    //            command.Parameters.AddWithValue("@QuizID", quizId);
+
+    //            using (var reader = command.ExecuteReader())
+    //            {
+    //                while (reader.Read()) questionIds.Add(reader.GetInt32(0));
+    //            }
+    //        }
+    //    }
+
+    //    return questionIds;
+    //}
     public List<int> GetAddedQuestionIds(int quizId)
     {
         var questionIds = new List<int>();
@@ -127,14 +147,19 @@ public class QuizWiseQuestionCRUD
         using (var connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            using (var command = new SqlCommand("SELECT QuestionID FROM MST_QuizWiseQuestions WHERE QuizID = @QuizID",
-                       connection))
+            using (var command = new SqlCommand("SELECT ISNULL(QuestionID, 0) FROM MST_QuizWiseQuestions WHERE QuizID = @QuizID", connection))
             {
                 command.Parameters.AddWithValue("@QuizID", quizId);
 
                 using (var reader = command.ExecuteReader())
                 {
-                    while (reader.Read()) questionIds.Add(reader.GetInt32(0));
+                    while (reader.Read())
+                    {
+                        if (!reader.IsDBNull(0)) // Ensure it's not NULL before adding
+                        {
+                            questionIds.Add(reader.GetInt32(0));
+                        }
+                    }
                 }
             }
         }
@@ -142,6 +167,26 @@ public class QuizWiseQuestionCRUD
         return questionIds;
     }
 
+
+    //public bool AddQuizWiseQuestion(int quizId, int questionId, int userId)
+    //{
+    //    var connectionString = configuration.GetConnectionString("ConnectionString");
+
+    //    using (var connection = new SqlConnection(connectionString))
+    //    {
+    //        connection.Open();
+    //        using (var command = new SqlCommand("PR_QuizQuestionsWise_Insert", connection))
+    //        {
+    //            command.CommandType = CommandType.StoredProcedure;
+    //            command.Parameters.AddWithValue("@QuizID", quizId);
+    //            command.Parameters.AddWithValue("@QuestionID", questionId);
+    //            command.Parameters.AddWithValue("@UserID", 1);
+
+    //            var result = command.ExecuteNonQuery();
+    //            return result > 0;
+    //        }
+    //    }
+    //}
     public bool AddQuizWiseQuestion(int quizId, int questionId, int userId)
     {
         var connectionString = configuration.GetConnectionString("ConnectionString");
@@ -149,20 +194,39 @@ public class QuizWiseQuestionCRUD
         using (var connection = new SqlConnection(connectionString))
         {
             connection.Open();
-            using (var command = new SqlCommand("PR_QuizQuestionsWise_Insert", connection))
-            {
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@QuizID", quizId);
-                command.Parameters.AddWithValue("@QuestionID", questionId);
-                command.Parameters.AddWithValue("@UserID", userId);
-                command.Parameters.AddWithValue("@Created", DateTime.Now);
-                command.Parameters.AddWithValue("@Modified", DateTime.Now);
 
-                var result = command.ExecuteNonQuery();
-                return result > 0;
+            using (var transaction = connection.BeginTransaction())
+            {
+                try
+                {
+                    using (var deleteCommand = new SqlCommand("DELETE FROM MST_QuizWiseQuestions WHERE QuizID = @QuizID AND QuestionID IS NULL", connection, transaction))
+                    {
+                        deleteCommand.Parameters.AddWithValue("@QuizID", quizId);
+                        deleteCommand.ExecuteNonQuery();
+                    }
+
+                    using (var insertCommand = new SqlCommand("PR_QuizQuestionsWise_Insert", connection, transaction))
+                    {
+                        insertCommand.CommandType = CommandType.StoredProcedure;
+                        insertCommand.Parameters.AddWithValue("@QuizID", quizId);
+                        insertCommand.Parameters.AddWithValue("@QuestionID", questionId);
+                        insertCommand.Parameters.AddWithValue("@UserID", userId);
+
+                        var result = insertCommand.ExecuteNonQuery();
+
+                        transaction.Commit();
+                        return result > 0;
+                    }
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
             }
         }
     }
+
 
     public bool DeleteQuizWiseQuestion(int quizWiseQuestionId)
     {

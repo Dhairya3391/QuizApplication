@@ -13,7 +13,7 @@ public class QuizCRUD
         configuration = _configuration;
     }
 
-    public bool AddQuiz(QuizModel model)
+    public int AddQuiz(QuizModel model)
     {
         var connectionString = configuration.GetConnectionString("ConnectionString");
         using (var connection = new SqlConnection(connectionString))
@@ -29,8 +29,15 @@ public class QuizCRUD
             command.Parameters.AddWithValue("@Created", DateTime.Now);
             command.Parameters.AddWithValue("@Modified", DateTime.Now);
 
-            var result = command.ExecuteNonQuery();
-            return result > 0;
+            SqlParameter outputQuizID = new SqlParameter("@QuizID", SqlDbType.Int);
+            outputQuizID.Direction = ParameterDirection.Output;
+            command.Parameters.Add(outputQuizID);
+
+            command.ExecuteNonQuery();
+
+            return (int)outputQuizID.Value;
+            //var result = command.ExecuteNonQuery();
+            //return result > 0;
         }
     }
 

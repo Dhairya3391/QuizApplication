@@ -17,19 +17,19 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Quiz Name: @ViewBag.QuizName</h5>
+                <h5 class="card-title">Quiz Name: @TempData["QuizName"]</h5>
                 @* <h2>Quiz Name: @ViewBag.QuizName</h2> *@
-                <p>Total Questions: @ViewBag.TotalQuestions</p>
+                <p>Total Questions: @TempData["totalQuestions"]</p>
             </div>
         </div>
 
         <div class="card">
             <div class="card-body">
                 <div class="d-flex p-3 justify-content-between align-items-center">
-                    <h2 class="card-title">Questions (@ViewBag.QuizName)</h2>
+                    <h2 class="card-title">Questions (@TempData["QuizName"])</h2>
 
                     <a asp-action="AddQuizWiseQuestions" asp-controller="QuizWiseQuestion" class="btn btn-primary"
-                       asp-route-quizName="@ViewBag.QuizName" asp-route-totalQuestions="@ViewBag.TotalQuestions">
+                       asp-route-quizName="@TempData["QuizName"]" asp-route-totalQuestions="@TempData["totalQuestions"]">
                         <i class="bi bi-plus"></i> Add Questions
                     </a>
 
