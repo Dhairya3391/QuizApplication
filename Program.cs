@@ -1,4 +1,7 @@
+using QuizApplication;
 using QuizApplication.DbConfigruation;
+
+//using QuizApplication.DbConfigruation;
 using QuizApplication.DbConfiguration;
 using QuizApplication.Services;
 
@@ -12,6 +15,7 @@ builder.Services.AddSingleton<QuestionLevelCRUD>();
 builder.Services.AddSingleton<QuizCRUD>();
 builder.Services.AddSingleton<QuizWiseQuestionCRUD>();
 builder.Services.AddSingleton<UserCrud>();
+//builder.Services.AddScoped<CommonVariables>();
 builder.Services.AddScoped<UserCrud>();
 builder.Services.AddSession(options =>
 {
@@ -19,6 +23,8 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+builder.Services.AddHttpContextAccessor();
+
 
 var app = builder.Build();
 

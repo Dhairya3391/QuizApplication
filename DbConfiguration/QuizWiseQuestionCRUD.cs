@@ -22,7 +22,7 @@ public class QuizWiseQuestionCRUD
         command.CommandType = CommandType.StoredProcedure;
 
         command.Parameters.AddWithValue("@QuizID", quizId);
-        command.Parameters.AddWithValue("@UserID", 1);
+        command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
         int result = command.ExecuteNonQuery();
         return result > 0;
     }
@@ -62,7 +62,7 @@ public class QuizWiseQuestionCRUD
             {
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "PR_QuizQuestionsWise_Details";
-
+                command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
                 // ✅ Pass quizId as a parameter to the stored procedure
                 command.Parameters.AddWithValue("@QuizID", quizId);
 
@@ -92,7 +92,7 @@ public class QuizWiseQuestionCRUD
                 {
                     command.Parameters.AddWithValue("@QuizID", quizId);
                     command.Parameters.AddWithValue("@QuestionID", questionId);
-                    command.Parameters.AddWithValue("@UserID", 1); // Replace with actual user ID
+                    command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
                     command.ExecuteNonQuery();
                 }
         }
@@ -106,10 +106,10 @@ public class QuizWiseQuestionCRUD
         {
             connection.Open();
 
-            using (var command = new SqlCommand("SELECT QuizID FROM MST_Quiz WHERE QuizName = @QuizName", connection))
+            using (var command = new SqlCommand("SELECT QuizID FROM MST_Quiz WHERE QuizName = @QuizName and MST_Quiz.UserID=@UserID ", connection))
             {
                 command.Parameters.AddWithValue("@QuizName", quizName);
-
+                command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
                 var result = command.ExecuteScalar();
                 return result != null ? Convert.ToInt32(result) : 0; // Return 0 if not found
             }
@@ -210,7 +210,7 @@ public class QuizWiseQuestionCRUD
                         insertCommand.CommandType = CommandType.StoredProcedure;
                         insertCommand.Parameters.AddWithValue("@QuizID", quizId);
                         insertCommand.Parameters.AddWithValue("@QuestionID", questionId);
-                        insertCommand.Parameters.AddWithValue("@UserID", userId);
+                        insertCommand.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
 
                         var result = insertCommand.ExecuteNonQuery();
 
@@ -236,6 +236,7 @@ public class QuizWiseQuestionCRUD
         connection.Open();
         var command = new SqlCommand("PR_QuizQuestionsWise_DeleteByPk", connection);
         command.CommandType = CommandType.StoredProcedure;
+        command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
 
         command.Parameters.AddWithValue("@QuizWiseQuestionsID", quizWiseQuestionId);
         var result = command.ExecuteNonQuery();

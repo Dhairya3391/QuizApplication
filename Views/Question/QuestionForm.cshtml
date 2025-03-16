@@ -1,4 +1,25 @@
 ﻿@model QuestionModel
+@using System.Data
+
+
+@{
+    ViewBag.Title = "Add Question";
+    var questionLevel = ViewBag.QuestionLevels as DataTable;
+    var questionLevelList = new List<SelectListItem>();
+
+    if (questionLevel != null)
+    {
+        foreach (DataRow row in questionLevel.Rows)
+        {
+            questionLevelList.Add(new SelectListItem
+                    {
+                        Text = row["QuestionLevel"].ToString(), 
+                        Value = row["QuestionLevelID"].ToString()   
+                    });
+        }
+    }
+
+}
 <div class="pagetitle">
     <h1>Question Forms</h1>
     <nav>
@@ -44,7 +65,10 @@
                         @Html.TextBoxFor(m => m.QuestionText, new { @class = "form-control border border-black", placeholder = "Question Text" })
                         @Html.ValidationMessageFor(m => m.QuestionText, "", new { @class = "text-danger" })
                     </div>
-
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(m => m.QuestionLevelID, questionLevelList, "Select Correct Option", new { @class = "form-control border border-black" })
+                        @Html.ValidationMessageFor(m => m.QuestionLevelID, "", new { @class = "text-danger" })
+                    </div>
 
                     <div class="col-md-6">
                         @Html.TextBoxFor(m => m.OptionA, new { @class = "form-control border border-black", placeholder = "Option A" })

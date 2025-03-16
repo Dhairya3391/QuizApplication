@@ -24,7 +24,7 @@ public class QuestionLevelCRUD
             command.CommandType = CommandType.StoredProcedure;
 
             command.Parameters.AddWithValue("@QuestionLevel", model.QuestionLevel);
-            command.Parameters.AddWithValue("@UserID", model.UserID);
+            command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
             command.Parameters.AddWithValue("@Created", DateTime.Now);
             command.Parameters.AddWithValue("@Modified", DateTime.Now);
 
@@ -42,7 +42,7 @@ public class QuestionLevelCRUD
             connection.Open();
             var command = new SqlCommand("PR_QuestionLevel_SelectByPK", connection);
             command.CommandType = CommandType.StoredProcedure;
-
+            command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
             command.Parameters.AddWithValue("@QuestionLevelID", questionLevelId);
 
             var reader = command.ExecuteReader();
@@ -64,7 +64,7 @@ public class QuestionLevelCRUD
 
             command.Parameters.AddWithValue("@QuestionLevelID", model.QuestionLevelID);
             command.Parameters.AddWithValue("@QuestionLevel", model.QuestionLevel);
-            command.Parameters.AddWithValue("@UserID", model.UserID);
+            command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
             command.Parameters.AddWithValue("@Created", model.Created);
             command.Parameters.AddWithValue("@Modified", DateTime.Now);
 
@@ -82,7 +82,7 @@ public class QuestionLevelCRUD
             connection.Open();
             var command = new SqlCommand("PR_QuestionLevel_DeleteByPk", connection);
             command.CommandType = CommandType.StoredProcedure;
-
+            command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
             command.Parameters.AddWithValue("@QuestionLevelID", questionLevelId);
 
             var result = command.ExecuteNonQuery();

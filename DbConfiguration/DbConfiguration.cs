@@ -57,6 +57,7 @@ public class DbConfiguration
             {
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = spName;
+                command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
 
                 using (var reader = command.ExecuteReader())
                 {

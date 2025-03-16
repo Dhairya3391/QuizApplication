@@ -16,9 +16,6 @@ public class QuizModel
     [Required(ErrorMessage = "Quiz Date is required.")]
     [DataType(DataType.Date)]
     public DateTime QuizDate { get; set; }
-
-    [Required(ErrorMessage = "User ID is required.")]
-    [Range(1, int.MaxValue, ErrorMessage = "User ID must be a positive number.")]
     public int UserID { get; set; }
 
     public DateTime Created { get; set; }

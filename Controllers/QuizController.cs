@@ -1,8 +1,8 @@
 ﻿using System.Data;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using QuizApplication.DbConfiguration;
 using QuizApplication.Models;
-using ClosedXML.Excel;
 
 
 namespace QuizApplication.Controllers;
@@ -52,8 +52,10 @@ public class QuizController : Controller
     [HttpPost]
     public ActionResult AddQuiz(QuizModel model)
     {
+        Console.WriteLine("ADDQUIZ");
         if (ModelState.IsValid)
         {
+            Console.WriteLine("ADDQUIZzz");
             //var isInserted = _quizCRUD.AddQuiz(model);
             int quizId = _quizCRUD.AddQuiz(model);
             if (quizId > 0) { 
@@ -85,12 +87,11 @@ public class QuizController : Controller
                 QuizName = dt.Rows[0]["QuizName"].ToString(),
                 TotalQuestions = Convert.ToInt32(dt.Rows[0]["TotalQuestions"]),
                 QuizDate = Convert.ToDateTime(dt.Rows[0]["QuizDate"]),
-                UserID = Convert.ToInt32(dt.Rows[0]["UserID"]),
                 Created = Convert.ToDateTime(dt.Rows[0]["Created"]),
                 Modified = Convert.ToDateTime(dt.Rows[0]["Modified"])
             };
             return View(model);
-        }
+        }   
 
         TempData["ErrorMessage"] = "Quiz not found.";
         return RedirectToAction("QuizList");

@@ -94,6 +94,24 @@
 
 <section class="section">
     <div class="row">
+        <div class="p-2">
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success d-flex justify-content-between">
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                            style="background-size:50%"></button>
+                </div>
+            }
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger d-flex justify-content-between">
+                    @TempData["ErrorMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                            style="background-size:50%"></button>
+                </div>
+            }
+        </div>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Search Question Level</h5>
@@ -113,7 +131,7 @@
                     </a>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-striped table-bordered table-hover">
+                    <table class="table table-hover datatable">
                         <thead class="table-dark">
                         <tr>
                             <th>QuestionLevelID</th>

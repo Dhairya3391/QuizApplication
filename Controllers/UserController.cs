@@ -27,6 +27,7 @@ public class UserController : Controller
 
     public IActionResult UserList()
     {
-        return View(_dbConfiguration.GetAllData("PR_User_SelectAll"));
+
+        return View(_userCrud.Users("PR_User_SelectAll"));
     }
 }

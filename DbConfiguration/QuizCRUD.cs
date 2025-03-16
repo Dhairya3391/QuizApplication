@@ -25,7 +25,7 @@ public class QuizCRUD
             command.Parameters.AddWithValue("@QuizName", model.QuizName);
             command.Parameters.AddWithValue("@TotalQuestions", model.TotalQuestions);
             command.Parameters.AddWithValue("@QuizDate", model.QuizDate);
-            command.Parameters.AddWithValue("@UserID", model.UserID);
+            command.Parameters.AddWithValue("@UserID",SessionVariables.UserID());
             command.Parameters.AddWithValue("@Created", DateTime.Now);
             command.Parameters.AddWithValue("@Modified", DateTime.Now);
 
@@ -50,6 +50,7 @@ public class QuizCRUD
             var command = new SqlCommand("PR_Quiz_SelectByID", connection);
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@QuizID", quizId);
+            command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
 
             var reader = command.ExecuteReader();
             var table = new DataTable();
@@ -71,7 +72,7 @@ public class QuizCRUD
             command.Parameters.AddWithValue("@QuizName", model.QuizName);
             command.Parameters.AddWithValue("@TotalQuestions", model.TotalQuestions);
             command.Parameters.AddWithValue("@QuizDate", model.QuizDate);
-            command.Parameters.AddWithValue("@UserID", model.UserID);
+            command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
             command.Parameters.AddWithValue("@Created", model.Created);
             command.Parameters.AddWithValue("@Modified", model.Modified);
 
@@ -89,7 +90,7 @@ public class QuizCRUD
             var command = new SqlCommand("PR_Quiz_DeleteByPk", connection);
             command.CommandType = CommandType.StoredProcedure;
             command.Parameters.AddWithValue("@QuizID", quizId);
-
+            command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
             var result = command.ExecuteNonQuery();
             return result > 0;
         }
@@ -107,7 +108,7 @@ public class QuizCRUD
             command.Parameters.AddWithValue("@QuizName", (object)quizName ?? DBNull.Value);
             command.Parameters.AddWithValue("@TotalQuestion", (object)totalQuestion ?? DBNull.Value);
             command.Parameters.AddWithValue("@QuizDate", (object)quizDate ?? DBNull.Value);
-
+            command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
             var reader = command.ExecuteReader();
             var table = new DataTable();
             table.Load(reader);

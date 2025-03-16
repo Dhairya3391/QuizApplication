@@ -32,9 +32,8 @@ public class QuestionCRUD
         command.Parameters.AddWithValue("@IsActive", model.IsActive);
         command.Parameters.AddWithValue("@Created", DateTime.Now);
         command.Parameters.AddWithValue("@Modified", DateTime.Now);
-
-        command.Parameters.AddWithValue("@UserID", 1);
-        command.Parameters.AddWithValue("@QuestionLevelID", 1);
+        command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
+        command.Parameters.AddWithValue("@QuestionLevelID", model.QuestionLevelID);
 
         var result = command.ExecuteNonQuery();
         return result > 0;
@@ -48,7 +47,7 @@ public class QuestionCRUD
         connection.Open();
         var command = new SqlCommand("PR_Question_SelectByPK", connection);
         command.CommandType = CommandType.StoredProcedure;
-
+        command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
         command.Parameters.AddWithValue("@QuestionID", questionId);
 
         var reader = command.ExecuteReader();
@@ -96,8 +95,8 @@ public class QuestionCRUD
             command.Parameters.AddWithValue("@QuestionMarks", model.QuestionMarks);
             command.Parameters.AddWithValue("@IsActive", model.IsActive);
 
-            command.Parameters.AddWithValue("@QuestionLevelID", 1);
-            command.Parameters.AddWithValue("@UserID", 1);
+            command.Parameters.AddWithValue("@QuestionLevelID", model.QuestionLevelID);
+            command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
             command.Parameters.AddWithValue("@Created", model.Created);
             command.Parameters.AddWithValue("@Modified", model.Modified);
 
@@ -116,6 +115,7 @@ public class QuestionCRUD
         connection.Open();
         var command = new SqlCommand("PR_Question_DeleteByPk", connection);
         command.CommandType = CommandType.StoredProcedure;
+        command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
 
         command.Parameters.AddWithValue("@QuestionID", questionId);
         var result = command.ExecuteNonQuery();
@@ -134,6 +134,7 @@ public class QuestionCRUD
             command.Parameters.AddWithValue("@QuestionText", (object)questionText ?? DBNull.Value);
             command.Parameters.AddWithValue("@CorrectOptions", (object)correctOptions ?? DBNull.Value);
             command.Parameters.AddWithValue("@QuestionMarks", (object)questionMarks ?? DBNull.Value);
+            command.Parameters.AddWithValue("@UserID", SessionVariables.UserID());
 
             var reader = command.ExecuteReader();
             var table = new DataTable();

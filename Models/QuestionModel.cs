@@ -59,7 +59,7 @@ public class QuestionModel
     [Required(ErrorMessage = "Please specify if the question is active.")]
     public bool? IsActive { get; set; }
 
-    [Required(ErrorMessage = "User ID is required.")]
+
     public int UserID { get; set; }
 
     public int Created { get; set; }

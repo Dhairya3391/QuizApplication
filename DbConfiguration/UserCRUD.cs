@@ -71,6 +71,26 @@ public class UserCrud
         }
     }
 
+    public DataTable Users(string spName)
+    {
+        using (var connection = new SqlConnection(_connectionString))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                command.CommandText = spName;
+   
+                using (var reader = command.ExecuteReader())
+                {
+                    var table = new DataTable();
+                    table.Load(reader);
+                    return table;
+                }
+            }
+        }
+    }
     public bool DeleteUser(int userId)
     {
         using (var connection = new SqlConnection(_connectionString))

@@ -38,11 +38,6 @@
                     </div>
 
                     <div class="col-md-6">
-                        @Html.TextBoxFor(m => m.UserID, new { @class = "form-control border border-black", placeholder = "User ID", type = "number" })
-                        @Html.ValidationMessageFor(m => m.UserID, "", new { @class = "text-danger" })
-                    </div>
-
-                    <div class="col-md-6">
                         @Html.TextBoxFor(m => m.Created, new { @class = "form-control border border-black", placeholder = "Created", @readonly = "readonly" })
                     </div>
 

@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using QuizApplication.DbConfiguration;
 using QuizApplication.Models;
 
@@ -18,6 +19,7 @@ public class QuestionController : Controller
 
     public IActionResult QuestionForm()
     {
+        ViewBag.QuestionLevels = _dbConfiguration.GetAllData("PR_QuestionLevel_SelectAll");
         return View();
     }
 
@@ -90,7 +92,9 @@ public class QuestionController : Controller
         {
             var model = new QuestionModel
             {
+            
                 QuestionID = Convert.ToInt32(dt.Rows[0]["QuestionID"]),
+                QuestionLevelID = Convert.ToInt32(dt.Rows[0]["QuestionLevelID"]),
                 QuestionText = dt.Rows[0]["QuestionText"].ToString(),
                 OptionA = dt.Rows[0]["OptionA"].ToString(),
                 OptionB = dt.Rows[0]["OptionB"].ToString(),
@@ -101,6 +105,16 @@ public class QuestionController : Controller
                 IsActive = dt.Columns.Contains("IsActive") ? Convert.ToBoolean(dt.Rows[0]["IsActive"]) : false,
                 UserID = Convert.ToInt32(dt.Rows[0]["UserID"].ToString())
             };
+            DataTable questionLevel = _dbConfiguration.GetAllData("PR_QuestionLevel_SelectAll");
+            var questionLevelList = questionLevel.AsEnumerable().Select(row => new SelectListItem
+            {
+                Text = row["QuestionLevel"].ToString(),
+                Value = row["QuestionLevelID"].ToString(),
+                Selected = (Convert.ToInt32(row["QuestionLevelID"]) == model.QuestionLevelID) // Mark selected country
+            }).ToList();
+
+            ViewBag.QuestionLevel = questionLevelList; // Store country list in ViewBag
+
 
             return View(model);
         }
